@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+require('./db/mongoose')
 const express = require('express')
 const dailyRouter = require('./routes/daily')
 const { request } = require('express')
