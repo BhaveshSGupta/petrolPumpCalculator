@@ -3,7 +3,7 @@ const express = require('express')
 const dailyRouter = require('./routes/daily')
 const { request } = require('express')
 
-const port = 3245
+const port = process.env.PORT
 
 const app = express()
 app.use(dailyRouter)
