@@ -15,6 +15,10 @@ const DailyDataSechema = new mongoose.Schema({
         trim:true,
         required:true
       },
+      Volume_in_MS:{
+        type:String,
+        trim:true
+      },
     HSD_DIP1: {
         type: String,
         trim:true,
@@ -24,6 +28,13 @@ const DailyDataSechema = new mongoose.Schema({
         type: String,
         trim:true,
         required:true
+      }, Volume_in_HSD_DIP1:{
+        type:String,
+        trim:true
+      },
+      Volume_in_HSD_DIP2:{
+        type:String,
+        trim:true
       },
       Closing_Reading_MS_Dispenser_1_Nozle_1:{
         type: String,
