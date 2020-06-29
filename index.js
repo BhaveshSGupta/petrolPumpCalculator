@@ -6,16 +6,16 @@ const app = express()
 app.use(express.json())
 const Dailydata = require('./models/dailyData.js')
 
-// app.get('/',(request, response)=>{
-//     response.send('<h1>Hello World</h1>')
-// })
-app.post('/',async (request, response)=>{
-    const data = new Dailydata({})
-    // console.log(...request.body)
-    const body = {...request.body}
-    console.log(body)
+app.post('/daily',async (request, response)=>{
+
+    const dailydata = new Dailydata({...request.body}) 
+    try {
+        await dailydata.save()
+        res.status(201).send(task)
+      } catch (e) {
+        res.status(400).send(e)
+      }
+   
    await response.send({"recived":true})
 })
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
-// app.use(cors())
-// app.use(express.json())
