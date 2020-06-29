@@ -1,4 +1,5 @@
-const KeshavProtrolPump = new mongoose.Schema({
+const mongoose = require('mongoose')
+const DailyDataSechema = new mongoose.Schema({
     MS:{
       type: String,
       trim:true,
@@ -91,4 +92,6 @@ const KeshavProtrolPump = new mongoose.Schema({
   },{
     timestamps:true
   })
-  const Record = mongoose.model('Record', recordSechema)
+  const dailyData = mongoose.model('DailyData', DailyDataSechema)
+  
+module.exports = dailyData
