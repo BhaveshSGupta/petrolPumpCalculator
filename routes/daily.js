@@ -6,17 +6,17 @@ const Dailydata = require('../models/dailyData')
 const calVolofPetrol = (number) => {
   const intNumber = parseInt(number)
   if (intNumber < number) {
-    return ((number - intNumber) * volumneStaticData.MS[intNumber - 1].DIFFERENCE + volumneStaticData.MS[intNumber - 1].VOLUME).toFixed(0)
+    return (number - intNumber) * 10 * volumneStaticData.MS[intNumber - 1].DIFFERENCE + volumneStaticData.MS[intNumber - 1].VOLUME
   }
-  return (volumneStaticData.MS[intNumber - 1].VOLUME).toFixed(0)
+  return volumneStaticData.MS[intNumber - 1].VOLUME
 }
 
 const calVolofDiesel = (number) => {
   const intNumber = parseInt(number)
   if (intNumber < number) {
-    return ((number - intNumber) * volumneStaticData.HSD[intNumber - 1].DIFFERENCE + volumneStaticData.HSD[intNumber - 1].VOLUME).toFixed(0)
+    return (number - intNumber) * 10 * volumneStaticData.HSD[intNumber - 1].DIFFERENCE + volumneStaticData.HSD[intNumber - 1].VOLUME
   }
-  return (volumneStaticData.HSD[intNumber - 1].VOLUME).toFixed(0)
+  return volumneStaticData.HSD[intNumber - 1].VOLUME
 }
 
 router.post('/daily', async (request, response) => {
@@ -41,9 +41,12 @@ router.post('/daily', async (request, response) => {
   }
   const dailydata = new Dailydata({
     ...request.body,
-    "Volume_in_MS": calVolofPetrol(inputData.MS_DIP),
-    "Volume_in_HSD_DIP1": calVolofDiesel(inputData.HSD_DIP1),
-    "Volume_in_HSD_DIP2": calVolofDiesel(inputData.HSD_DIP2),
+    "Volume_in_MS": (calVolofPetrol(inputData.MS_DIP)).toFixed(0),
+    "Volume_in_HSD_DIP1": (calVolofDiesel(inputData.HSD_DIP1)).toFixed(0),
+    "Volume_in_HSD_DIP2": (calVolofDiesel(inputData.HSD_DIP2)).toFixed(0),
+    "ABS_Volume_in_MS": calVolofPetrol(inputData.MS_DIP),
+    "ABS_Volume_in_HSD_DIP1": calVolofDiesel(inputData.HSD_DIP1),
+    "ABS_Volume_in_HSD_DIP2": calVolofDiesel(inputData.HSD_DIP2),
     "previous": allPreviousData._id,
     "next": ''
   })
