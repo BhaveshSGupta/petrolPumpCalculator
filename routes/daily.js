@@ -23,9 +23,6 @@ router.post('/daily', async (request, response) => {
   const inputData = {
     ...request.body
   }
-  // console.log(inputData)
-  // const volumeofPetrolTank = calVolofPetrol(inputData.MS_DIP)
-  // console.log(volumeofPetrolTank)
   let allPreviousData = {}
   try {
     allPreviousData = await Dailydata.findOne({
@@ -41,9 +38,6 @@ router.post('/daily', async (request, response) => {
   } catch {
     allPreviousData.id = ''
   }
-  // console.log({
-  //   allPreviousData
-  // })
   const dailydata = new Dailydata({
     ...request.body,
     "Volume_in_MS": calVolofPetrol(inputData.MS_DIP),
