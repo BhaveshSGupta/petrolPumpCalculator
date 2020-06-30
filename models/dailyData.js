@@ -99,6 +99,12 @@ const DailyDataSechema = new mongoose.Schema({
       Testing_HSD_Dispenser_3_Nozle_2:{
         type: String,
         trim:true,
+      },
+      previous:{
+        type:Object
+      },
+      next:{
+        type:Object
       }
   },{
     timestamps:true
