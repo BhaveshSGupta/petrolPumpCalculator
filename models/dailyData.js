@@ -101,10 +101,10 @@ const DailyDataSechema = new mongoose.Schema({
         trim:true,
       },
       previous:{
-        type:mongoose.Schema.Types.ObjectId
+        type:String
       },
       next:{
-        type:mongoose.Schema.Types.ObjectId
+        type:String
       }
   },{
     timestamps:true
