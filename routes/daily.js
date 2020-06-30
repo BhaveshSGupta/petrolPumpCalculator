@@ -24,12 +24,14 @@ router.post('/daily', async (request, response)=>{
   // console.log(inputData)
   const volumeofPetrolTank = calVolofPetrol(inputData.MS_DIP)
   // console.log(volumeofPetrolTank)
+  const allData = await Dailydata.findOne({}).sort('-createdAt')
+  console.log({allData})
     const dailydata = new Dailydata({
       ...request.body,
       "Volume_in_MS":calVolofPetrol(inputData.MS_DIP),
       "Volume_in_HSD_DIP1":calVolofDiesel(inputData.HSD_DIP1),
       "Volume_in_HSD_DIP2":calVolofDiesel(inputData.HSD_DIP2)
-    }) 
+    })
     try {
         await dailydata.save()
         response.status(201).send(dailydata)
