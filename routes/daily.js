@@ -6,17 +6,17 @@ const Dailydata = require('../models/dailyData')
 const calVolofPetrol = (number) => {
   const intNumber = parseInt(number)
   if (intNumber < number) {
-    return (number - intNumber) * volumneStaticData.MS[intNumber].DIFFERENCE + volumneStaticData.MS[intNumber].VOLUME
+    return ((number - intNumber) * volumneStaticData.MS[intNumber - 1].DIFFERENCE + volumneStaticData.MS[intNumber - 1].VOLUME).toFixed(0)
   }
-  return volumneStaticData.MS[intNumber].VOLUME
+  return (volumneStaticData.MS[intNumber - 1].VOLUME).toFixed(0)
 }
 
 const calVolofDiesel = (number) => {
   const intNumber = parseInt(number)
   if (intNumber < number) {
-    return (number - intNumber) * volumneStaticData.HSD[intNumber].DIFFERENCE + volumneStaticData.HSD[intNumber].VOLUME
+    return ((number - intNumber) * volumneStaticData.HSD[intNumber - 1].DIFFERENCE + volumneStaticData.HSD[intNumber - 1].VOLUME).toFixed(0)
   }
-  return volumneStaticData.HSD[intNumber].VOLUME
+  return (volumneStaticData.HSD[intNumber - 1].VOLUME).toFixed(0)
 }
 
 router.post('/daily', async (request, response) => {
@@ -52,7 +52,9 @@ router.post('/daily', async (request, response) => {
 
     if (allPreviousData._id !== '') {
       // await Dailydata.findByIdAndUpdate({'next':''})
-      const test = await Dailydata.findByIdAndUpdate(allPreviousData.id, {"next":idCurrent.id})
+      const test = await Dailydata.findByIdAndUpdate(allPreviousData.id, {
+        "next": idCurrent.id
+      })
       // await test.save()
       // console.log({test})
     }
