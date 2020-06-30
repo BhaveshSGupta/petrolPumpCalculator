@@ -12,10 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chokidar": "^3.4.0",
     "convert-excel-to-json": "^1.7.0",
     "env-cmd": "^10.1.0",
-    "eslint": "^7.3.1",
     "express": "^4.17.1",
     "mongoose": "^5.9.20",
     "nodemon": "^2.0.4"
