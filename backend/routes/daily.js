@@ -19,7 +19,7 @@ const calVolofDiesel = (number) => {
   return volumneStaticData.HSD[intNumber - 1].VOLUME
 }
 
-router.post('/daily', async (request, response) => {
+router.post('/api/daily', async (request, response) => {
   const inputData = {
     ...request.body
   }
