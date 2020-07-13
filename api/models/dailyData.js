@@ -118,6 +118,9 @@ const DailyDataSechema = new mongoose.Schema({
   },
   next: {
     type: String
+  },
+  date: {
+    type: Date
   }
 }, {
   timestamps: true

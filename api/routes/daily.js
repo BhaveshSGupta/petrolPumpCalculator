@@ -48,6 +48,7 @@ router.post('/daily', async (request, response) => {
     "ABS_Volume_in_HSD_DIP1": calVolofDiesel(inputData.HSD_DIP1),
     "ABS_Volume_in_HSD_DIP2": calVolofDiesel(inputData.HSD_DIP2),
     "previous": allPreviousData._id,
+    "date": new Date(),
     "next": ''
   })
   try {
