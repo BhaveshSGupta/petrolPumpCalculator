@@ -7,7 +7,7 @@ const { request } = require('express')
 const port = process.env.PORT
 
 const app = express()
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('Api Chal rahi hai')
 })
 app.use(express.json())
