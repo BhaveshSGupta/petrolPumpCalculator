@@ -20,8 +20,6 @@ const calVolofDiesel = (number) => {
     return volumneStaticData.HSD[intNumber - 1].VOLUME
 }
 
-const express = require('express')
-
 const port = process.env.PORT
 
 const app = express()
