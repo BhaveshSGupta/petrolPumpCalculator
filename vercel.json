@@ -17,9 +17,6 @@
         "src": "/backend/(.*)",
         "dest": "backend/$1"
       }
-    ],
-    "env": {
-      "MONGODB_URL": "@MONGODB_URL"
-    }
+    ]
   }
   
