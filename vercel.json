@@ -1,12 +1,8 @@
 {
-    "version": 2,
+    "version": 1,
     "public": true,
     "builds": [
-      { "src": "backend/**/*.js", "use": "@now/node" },
-      {
-        "src": "frontend/package.json",
-        "use": "@now/node"
-      }
+      { "src": "backend/**/*.js", "use": "@now/node" }
     ],
     "routes": [
       {
