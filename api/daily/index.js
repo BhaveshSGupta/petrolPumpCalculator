@@ -1,9 +1,10 @@
 // const mongoose = require('mongoose')
 // require('./db/mongoose')
 // const express = require('express')
-const volumneStaticData = require("../../excelConverter")
-const Dailydata = require("../../models/dailyData")
-const app = require("../../app")
+const volumneStaticData = require("../excelConverter")
+const Dailydata = require("../models/dailyData")
+const app = require("../app")
+const mongoose = require("mongoose")
 const calVolofPetrol = (number) => {
     const intNumber = parseInt(number)
     if (intNumber < number) {
@@ -23,8 +24,6 @@ const calVolofDiesel = (number) => {
 // const port = process.env.PORT
 
 app.get('*', (req, res) => {
-    const mongoose = require("mongoose")
-
     mongoose.connect(process.env.MONGODB_URL, {
         useFindAndModify: false,
         useNewUrlParser: true,
@@ -37,7 +36,6 @@ app.get('*', (req, res) => {
 
 
 app.post('*', async (request, response) => {
-    const mongoose = require("mongoose")
 
     mongoose.connect(process.env.MONGODB_URL, {
         useFindAndModify: false,
@@ -62,7 +60,6 @@ app.post('*', async (request, response) => {
             // })
         }
     } catch {
-        con
         allPreviousData._id = ''
     }
     const dailydata = new Dailydata({
