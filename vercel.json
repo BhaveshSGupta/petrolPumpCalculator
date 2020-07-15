@@ -23,7 +23,7 @@
       }
     ],
     "env": {
-      "MONGODB_ATLAS_URI": "@MONGODB_URL"
+      "MONGODB_URL": "@MONGODB_URL"
     }
   }
   

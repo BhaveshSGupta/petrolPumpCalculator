@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-require('./db/mongoose')
-const express = require('express')
-const volumneStaticData = require('./excelConverter/index')
-const Dailydata = require('./models/dailyData')
-
+// const mongoose = require('mongoose')
+// require('./db/mongoose')
+// const express = require('express')
+const volumneStaticData = require("../../excelConverter")
+const Dailydata = require("../../models/dailyData")
+const app = require("../../app")
 const calVolofPetrol = (number) => {
     const intNumber = parseInt(number)
     if (intNumber < number) {
@@ -20,18 +20,32 @@ const calVolofDiesel = (number) => {
     return volumneStaticData.HSD[intNumber - 1].VOLUME
 }
 
-const port = process.env.PORT
+// const port = process.env.PORT
 
-const app = express()
+app.get('*', (req, res) => {
+    const mongoose = require("mongoose")
 
-app.use(express.json())
-
-app.get('/api', (req, res) => {
+    mongoose.connect(process.env.MONGODB_URL, {
+        useFindAndModify: false,
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    });
+    mongoose.disconnect()
     res.send('Api Chal rahi hai')
 })
 
 
-app.post('/api/daily/', async (request, response) => {
+app.post('*', async (request, response) => {
+    const mongoose = require("mongoose")
+
+    mongoose.connect(process.env.MONGODB_URL, {
+        useFindAndModify: false,
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    });
+
     const inputData = {
         ...request.body
     }
@@ -78,7 +92,9 @@ app.post('/api/daily/', async (request, response) => {
     } catch (e) {
         response.status(400).send(e)
     }
+    mongoose.disconnect()
     // response.send({"recived":true})
 })
+module.exports = app
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+// app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
