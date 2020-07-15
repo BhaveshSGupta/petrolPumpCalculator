@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "public": true,
+    "builds": [
+      { "src": "backend/**/*.js", "use": "@now/node" },
+      {
+        "src": "frontend/package.json",
+        "use": "@now/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "backend/api/$1"
+      },
+      {
+        "src": "/auth/(.*)",
+        "dest": "backend/auth/$1"
+      },
+      {
+        "src": "/backend/(.*)",
+        "dest": "backend/$1"
+      }
+    ],
+    "env": {
+      "MONGODB_ATLAS_URI": "@MONGODB_URL"
+    }
+  }
+  
