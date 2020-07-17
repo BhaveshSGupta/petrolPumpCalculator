@@ -19,10 +19,12 @@
     "bcryptjs": "^2.4.3",
     "convert-excel-to-json": "^1.7.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.20",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "sharp": "^0.25.4",
     "validator": "^13.1.1"
   }
