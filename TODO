@@ -1,0 +1,6 @@
+- Add login perfectly with passport, call vimal for help if requred
+- Enable logger in backend, mongoose and other places
+- Enable production and staging deoployment
+- create form for autheticated users to enter data
+- Create view report feature, add print report functionality
+- Add date feature and add feature to add multiple date values
