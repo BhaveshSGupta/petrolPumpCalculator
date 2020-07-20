@@ -4,7 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import ProTip from './components/ProTip';
-import SignIn from './components/login/SignIn'
+// import SignIn from './components/login/SignIn'
+import Daily from './components/daily'
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -25,7 +26,8 @@ export default function App() {
         <Typography variant="h4" component="h1" gutterBottom>
           Welcome to Keshav PetrolPump
         </Typography>
-        <SignIn />
+        {/* <SignIn /> */}
+        <Daily/>
         <ProTip />
         <Copyright />
       </Box>
