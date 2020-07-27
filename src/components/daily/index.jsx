@@ -10,21 +10,21 @@ const Daily = () => {
   return (
     <Formik
       initialValues={{
-        MS: "50",
-        HSD: "55",
-        MS_DIP: "45",
-        HSD_DIP1: "44",
-        HSD_DIP2: "21",
-        Closing_Reading_MS_Dispenser_1_Nozle_1: "46",
-        Closing_Reading_MS_Dispenser_1_Nozle_2: "21",
+        MS: "",
+        HSD: "",
+        MS_DIP: "",
+        HSD_DIP1: "",
+        HSD_DIP2: "",
+        Closing_Reading_MS_Dispenser_1_Nozle_1: "",
+        Closing_Reading_MS_Dispenser_1_Nozle_2: "",
         Testing_MS_Dispenser_1_Nozle_1: "15",
         Testing_MS_Dispenser_1_Nozle_2: "15",
-        Closing_Reading_HSD_Dispenser_1_Nozle_1: "5523",
-        Closing_Reading_HSD_Dispenser_1_Nozle_2: "23",
-        Closing_Reading_HSD_Dispenser_2_Nozle_1: "520",
-        Closing_Reading_HSD_Dispenser_2_Nozle_2: "52",
-        Closing_Reading_HSD_Dispenser_3_Nozle_1: "1",
-        Closing_Reading_HSD_Dispenser_3_Nozle_2: "52",
+        Closing_Reading_HSD_Dispenser_1_Nozle_1: "",
+        Closing_Reading_HSD_Dispenser_1_Nozle_2: "",
+        Closing_Reading_HSD_Dispenser_2_Nozle_1: "",
+        Closing_Reading_HSD_Dispenser_2_Nozle_2: "",
+        Closing_Reading_HSD_Dispenser_3_Nozle_1: "",
+        Closing_Reading_HSD_Dispenser_3_Nozle_2: "",
         Testing_HSD_Dispenser_1_Nozle_1: "15",
         Testing_HSD_Dispenser_1_Nozle_2: "15",
         Testing_HSD_Dispenser_2_Nozle_1: "15",
@@ -71,8 +71,22 @@ const Daily = () => {
         Testing_HSD_Dispenser_3_Nozle_1: Yup.string().required("Required"),
         Testing_HSD_Dispenser_3_Nozle_2: Yup.string().required("Required"),
       })}
-      onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2));
+      onSubmit={async (values) => {
+        fetch("/api/daily", {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((res) =>{
+            alert(`Volume of MS:${res.Volume_in_MS} 
+            Volume of HSD1:${res.Volume_in_HSD_DIP1}
+            Volume of HSD2:${res.Volume_in_HSD_DIP1}`)
+          });
+        // console.log(values);
+        // alert(JSON.stringify(values, null, 2));
       }}
     >
       <Form>
