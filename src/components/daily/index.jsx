@@ -1,52 +1,180 @@
 import React from "react";
-import { useFormik } from "formik";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 import "./daily.css";
 import * as Yup from "yup";
 
 const Daily = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
-  const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-    },
-    validationSchema: Yup.object({
-      firstName: Yup.string().max(15, "Must be 15 chars").required("Required"),
-      lastName: Yup.string()
-        .max(20, "Must be 20 characters or less")
-        .required("Required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
-    }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="firstName">First Name</label>
-      <input
-        id="firstName"
-        type="text"
-        {...formik.getFieldProps("firstName")}
-      />
-      {formik.touched.firstName && formik.errors.firstName ? (
-        <div>{formik.errors.firstName}</div>
-      ) : null}
-      <label htmlFor="lastName">Last Name</label>
-      <input id="lastName" type="text" {...formik.getFieldProps("lastName")} />
-      {formik.touched.lastName && formik.errors.lastName ? (
-        <div>{formik.errors.lastName}</div>
-      ) : null}
-      <label htmlFor="email">Email Address</label>
-      <input id="email" type="email" {...formik.getFieldProps("email")} />
-      {formik.touched.email && formik.errors.email ? (
-        <div>{formik.errors.email}</div>
-      ) : null}
-      <button type="submit">Submit</button>
-    </form>
+    <Formik
+      initialValues={{
+        MS: "",
+        HSD: "",
+        MS_DIP: "",
+        HSD_DIP1: "",
+        HSD_DIP2: "",
+        Closing_Reading_MS_Dispenser_1_Nozle_1: "",
+        Closing_Reading_MS_Dispenser_1_Nozle_2: "",
+        Testing_MS_Dispenser_1_Nozle_1: "15",
+        Testing_MS_Dispenser_1_Nozle_2: "15",
+        Closing_Reading_HSD_Dispenser_1_Nozle_1: "",
+        Closing_Reading_HSD_Dispenser_1_Nozle_2: "",
+        Closing_Reading_HSD_Dispenser_2_Nozle_1: "",
+        Closing_Reading_HSD_Dispenser_2_Nozle_2: "",
+        Closing_Reading_HSD_Dispenser_3_Nozle_1: "",
+        Closing_Reading_HSD_Dispenser_3_Nozle_2: "",
+        Testing_HSD_Dispenser_1_Nozle_1: "15",
+        Testing_HSD_Dispenser_1_Nozle_2: "15",
+        Testing_HSD_Dispenser_2_Nozle_1: "15",
+        Testing_HSD_Dispenser_2_Nozle_2: "15",
+        Testing_HSD_Dispenser_3_Nozle_1: "15",
+        Testing_HSD_Dispenser_3_Nozle_2: "15",
+      }}
+      validationSchema={Yup.object({
+        MS: Yup.string().required("Required"),
+        HSD: Yup.string().required("Required"),
+        MS_DIP: Yup.string().required("Required"),
+        HSD_DIP1: Yup.string().required("Required"),
+        HSD_DIP2: Yup.string().required("Required"),
+        Closing_Reading_MS_Dispenser_1_Nozle_1: Yup.string().required(
+          "Required"
+        ),
+        Closing_Reading_MS_Dispenser_1_Nozle_2: Yup.string().required(
+          "Required"
+        ),
+        Testing_MS_Dispenser_1_Nozle_1: Yup.string().required("Required"),
+        Testing_MS_Dispenser_1_Nozle_2: Yup.string().required("Required"),
+        Closing_Reading_HSD_Dispenser_1_Nozle_1: Yup.string().required(
+          "Required"
+        ),
+        Closing_Reading_HSD_Dispenser_1_Nozle_2: Yup.string().required(
+          "Required"
+        ),
+        Closing_Reading_HSD_Dispenser_2_Nozle_1: Yup.string().required(
+          "Required"
+        ),
+        Closing_Reading_HSD_Dispenser_2_Nozle_2: Yup.string().required(
+          "Required"
+        ),
+        Closing_Reading_HSD_Dispenser_3_Nozle_1: Yup.string().required(
+          "Required"
+        ),
+        Closing_Reading_HSD_Dispenser_3_Nozle_2: Yup.string().required(
+          "Required"
+        ),
+        Testing_HSD_Dispenser_1_Nozle_1: Yup.string().required("Required"),
+        Testing_HSD_Dispenser_1_Nozle_2: Yup.string().required("Required"),
+        Testing_HSD_Dispenser_2_Nozle_1: Yup.string().required("Required"),
+        Testing_HSD_Dispenser_2_Nozle_2: Yup.string().required("Required"),
+        Testing_HSD_Dispenser_3_Nozle_1: Yup.string().required("Required"),
+        Testing_HSD_Dispenser_3_Nozle_2: Yup.string().required("Required"),
+      })}
+      onSubmit={(values) => {
+        alert(JSON.stringify(values, null, 2));
+      }}
+    >
+      <Form>
+        <label htmlFor="MS">MS</label>
+        <Field name="MS" type="text" />
+        <ErrorMessage name="MS" />
+        <label htmlFor="HSD">HSD</label>
+        <Field name="HSD" type="text" />
+        <ErrorMessage name="HSD" />
+        <label htmlFor="MS_DIP">MS_DIP</label>
+        <Field name="MS_DIP" type="text" />
+        <ErrorMessage name="MS_DIP" />
+        <label htmlFor="HSD_DIP1">HSD_DIP1</label>
+        <Field name="HSD_DIP1" type="text" />
+        <ErrorMessage name="HSD_DIP1" />
+        <label htmlFor="HSD_DIP2">HSD_DIP2</label>
+        <Field name="HSD_DIP2" type="text" />
+        <ErrorMessage name="HSD_DIP2" />
+        <label htmlFor="Closing_Reading_MS_Dispenser_1_Nozle_1">
+          Closing_Reading_MS_Dispenser_1_Nozle_1
+        </label>
+        <Field name="Closing_Reading_MS_Dispenser_1_Nozle_1" type="text" />
+        <ErrorMessage name="Closing_Reading_MS_Dispenser_1_Nozle_1" />
+        <label htmlFor="Closing_Reading_MS_Dispenser_1_Nozle_2">
+          Closing_Reading_MS_Dispenser_1_Nozle_2
+        </label>
+        <Field name="Closing_Reading_MS_Dispenser_1_Nozle_2" type="text" />
+        <ErrorMessage name="Closing_Reading_MS_Dispenser_1_Nozle_2" />
+        <label htmlFor="Testing_MS_Dispenser_1_Nozle_1">
+          Testing_MS_Dispenser_1_Nozle_1
+        </label>
+        <Field name="Testing_MS_Dispenser_1_Nozle_1" type="text" />
+        <ErrorMessage name="Testing_MS_Dispenser_1_Nozle_1" />
+        <label htmlFor="Testing_MS_Dispenser_1_Nozle_2">
+          Testing_MS_Dispenser_1_Nozle_2
+        </label>
+        <Field name="Testing_MS_Dispenser_1_Nozle_2" type="text" />
+        <ErrorMessage name="Testing_MS_Dispenser_1_Nozle_2" />
+        <label htmlFor="Closing_Reading_HSD_Dispenser_1_Nozle_1">
+          Closing_Reading_HSD_Dispenser_1_Nozle_1
+        </label>
+        <Field name="Closing_Reading_HSD_Dispenser_1_Nozle_1" type="text" />
+        <ErrorMessage name="Closing_Reading_HSD_Dispenser_1_Nozle_1" />
+        <label htmlFor="Closing_Reading_HSD_Dispenser_1_Nozle_2">
+          Closing_Reading_HSD_Dispenser_1_Nozle_2
+        </label>
+        <Field name="Closing_Reading_HSD_Dispenser_1_Nozle_2" type="text" />
+        <ErrorMessage name="Closing_Reading_HSD_Dispenser_1_Nozle_2" />
+        <label htmlFor="Closing_Reading_HSD_Dispenser_2_Nozle_1">
+          Closing_Reading_HSD_Dispenser_2_Nozle_1
+        </label>
+        <Field name="Closing_Reading_HSD_Dispenser_2_Nozle_1" type="text" />
+        <ErrorMessage name="Closing_Reading_HSD_Dispenser_2_Nozle_1" />
+        <label htmlFor="Closing_Reading_HSD_Dispenser_2_Nozle_2">
+          Closing_Reading_HSD_Dispenser_2_Nozle_2
+        </label>
+        <Field name="Closing_Reading_HSD_Dispenser_2_Nozle_2" type="text" />
+        <ErrorMessage name="Closing_Reading_HSD_Dispenser_2_Nozle_2" />
+        <label htmlFor="Closing_Reading_HSD_Dispenser_3_Nozle_1">
+          Closing_Reading_HSD_Dispenser_3_Nozle_1
+        </label>
+        <Field name="Closing_Reading_HSD_Dispenser_3_Nozle_1" type="text" />
+        <ErrorMessage name="Closing_Reading_HSD_Dispenser_3_Nozle_1" />
+        <label htmlFor="Closing_Reading_HSD_Dispenser_3_Nozle_2">
+          Closing_Reading_HSD_Dispenser_3_Nozle_2
+        </label>
+        <Field name="Closing_Reading_HSD_Dispenser_3_Nozle_2" type="text" />
+        <ErrorMessage name="Closing_Reading_HSD_Dispenser_3_Nozle_2" />
+        <label htmlFor="Testing_HSD_Dispenser_1_Nozle_1">
+          Testing_HSD_Dispenser_1_Nozle_1
+        </label>
+        <Field name="Testing_HSD_Dispenser_1_Nozle_1" type="text" />
+        <ErrorMessage name="Testing_HSD_Dispenser_1_Nozle_1" />
+        <label htmlFor="Testing_HSD_Dispenser_1_Nozle_2">
+          Testing_HSD_Dispenser_1_Nozle_2
+        </label>
+        <Field name="Testing_HSD_Dispenser_1_Nozle_2" type="text" />
+        <ErrorMessage name="Testing_HSD_Dispenser_1_Nozle_2" />
+        <label htmlFor="Testing_HSD_Dispenser_2_Nozle_1">
+          Testing_HSD_Dispenser_2_Nozle_1
+        </label>
+        <Field name="Testing_HSD_Dispenser_2_Nozle_1" type="text" />
+        <ErrorMessage name="Testing_HSD_Dispenser_2_Nozle_1" />
+        <label htmlFor="Testing_HSD_Dispenser_2_Nozle_2">
+          Testing_HSD_Dispenser_2_Nozle_2
+        </label>
+        <Field name="Testing_HSD_Dispenser_2_Nozle_2" type="text" />
+        <ErrorMessage name="Testing_HSD_Dispenser_2_Nozle_2" />
+        <label htmlFor="Testing_HSD_Dispenser_3_Nozle_1">
+          Testing_HSD_Dispenser_3_Nozle_1
+        </label>
+        <Field name="Testing_HSD_Dispenser_3_Nozle_1" type="text" />
+        <ErrorMessage name="Testing_HSD_Dispenser_3_Nozle_1" />
+        <label htmlFor="Testing_HSD_Dispenser_3_Nozle_2">
+          Testing_HSD_Dispenser_3_Nozle_2
+        </label>
+        <Field name="Testing_HSD_Dispenser_3_Nozle_2" type="text" />
+        <ErrorMessage name="Testing_HSD_Dispenser_3_Nozle_2" />
+
+        <button type="submit">Submit</button>
+      </Form>
+    </Formik>
   );
 };
 export default Daily;
