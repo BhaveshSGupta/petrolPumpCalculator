@@ -33,19 +33,40 @@ const Daily = () => {
         Testing_HSD_Dispenser_3_Nozle_2: "15",
       }}
       validationSchema={Yup.object({
-        MS: Yup.string().required("Required"),
-        HSD: Yup.string().required("Required"),
-        MS_DIP: Yup.string().required("Required"),
-        HSD_DIP1: Yup.string().required("Required"),
-        HSD_DIP2: Yup.string().required("Required"),
+        MS: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
+        HSD: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
+        MS_DIP: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
+        HSD_DIP1: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
+        HSD_DIP2: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
         Closing_Reading_MS_Dispenser_1_Nozle_1: Yup.string().required(
           "Required"
         ),
         Closing_Reading_MS_Dispenser_1_Nozle_2: Yup.string().required(
           "Required"
         ),
-        Testing_MS_Dispenser_1_Nozle_1: Yup.string().required("Required"),
-        Testing_MS_Dispenser_1_Nozle_2: Yup.string().required("Required"),
+        Testing_MS_Dispenser_1_Nozle_1: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
+        Testing_MS_Dispenser_1_Nozle_2: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
         Closing_Reading_HSD_Dispenser_1_Nozle_1: Yup.string().required(
           "Required"
         ),
@@ -64,12 +85,30 @@ const Daily = () => {
         Closing_Reading_HSD_Dispenser_3_Nozle_2: Yup.string().required(
           "Required"
         ),
-        Testing_HSD_Dispenser_1_Nozle_1: Yup.string().required("Required"),
-        Testing_HSD_Dispenser_1_Nozle_2: Yup.string().required("Required"),
-        Testing_HSD_Dispenser_2_Nozle_1: Yup.string().required("Required"),
-        Testing_HSD_Dispenser_2_Nozle_2: Yup.string().required("Required"),
-        Testing_HSD_Dispenser_3_Nozle_1: Yup.string().required("Required"),
-        Testing_HSD_Dispenser_3_Nozle_2: Yup.string().required("Required"),
+        Testing_HSD_Dispenser_1_Nozle_1: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
+        Testing_HSD_Dispenser_1_Nozle_2: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
+        Testing_HSD_Dispenser_2_Nozle_1: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
+        Testing_HSD_Dispenser_2_Nozle_2: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
+        Testing_HSD_Dispenser_3_Nozle_1: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
+        Testing_HSD_Dispenser_3_Nozle_2: Yup.number()
+          .typeError("Number is Required")
+          .required("Required")
+          .positive("Cannot be Negative"),
       })}
       onSubmit={async (values) => {
         fetch("/api/daily", {
@@ -80,10 +119,10 @@ const Daily = () => {
           },
         })
           .then((res) => res.json())
-          .then((res) =>{
+          .then((res) => {
             alert(`Volume of MS:${res.Volume_in_MS} 
             Volume of HSD1:${res.Volume_in_HSD_DIP1}
-            Volume of HSD2:${res.Volume_in_HSD_DIP1}`)
+            Volume of HSD2:${res.Volume_in_HSD_DIP1}`);
           });
         // console.log(values);
         // alert(JSON.stringify(values, null, 2));
