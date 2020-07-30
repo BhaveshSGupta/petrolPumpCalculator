@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import "./daily.css";
 import * as Yup from "yup";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const Daily = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
-
+  const [startDate, setStartDate] = useState(new Date());
   return (
     <Formik
       initialValues={{
@@ -129,6 +130,13 @@ const Daily = () => {
       }}
     >
       <Form>
+        <DatePicker
+          dateFormat="dd/MMMM/yyyy"
+          maxDate={new Date()}
+          selected={startDate}
+          todayButton="Today's"
+          onChange={(date) => setStartDate(date)}
+        />
         <label htmlFor="MS">MS</label>
         <Field name="MS" type="text" />
         <ErrorMessage name="MS" />
