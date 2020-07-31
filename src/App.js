@@ -8,26 +8,18 @@ import ProTip from "./components/ProTip";
 import Daily from "./components/daily";
 // import Dashboard from "./components/dasboard";
 // import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-function Copyright() {
-  return (
-    // <Typography variant="body2" color="textSecondary" align="center">
-    //   {"Copyright © "}
-    //   <Link color="inherit" href="https://material-ui.com/">
-    //     Your Website
-    //   </Link>{" "}
-    //   {new Date().getFullYear()}
-    //   {"."}
-    // </Typography>
-    <h1>Hello</h1>
-  );
-}
+// function Copyright() {
+//   return (
+//     <h6>Developed</h6>
+//   );
+// }
 
 export default function App() {
   return (
     <div>
       <Daily />
       <ProTip />
-      <Copyright />
+      {/* <Copyright /> */}
     </div>
   );
 }
