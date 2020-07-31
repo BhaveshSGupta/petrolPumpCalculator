@@ -1,6 +1,3 @@
-// const mongoose = require('mongoose')
-// require('./db/mongoose')
-// const express = require('express')
 const volumneStaticData = require("../excelConverter")
 const Dailydata = require("../models/dailyData")
 const app = require("../app")
@@ -20,8 +17,6 @@ const calVolofDiesel = (number) => {
     }
     return volumneStaticData.HSD[intNumber - 1].VOLUME
 }
-
-// const port = process.env.PORT
 
 app.get('*', (req, res) => {
     mongoose.connect(process.env.MONGODB_URL, {
@@ -55,9 +50,6 @@ app.post('*', async (request, response) => {
         if (!allPreviousData) {
             allPreviousData = {}
             allPreviousData._id = ''
-            // console.log({
-            //   allPreviousData
-            // })
         }
     } catch {
         allPreviousData._id = ''
@@ -71,27 +63,20 @@ app.post('*', async (request, response) => {
         "ABS_Volume_in_HSD_DIP1": calVolofDiesel(inputData.HSD_DIP1),
         "ABS_Volume_in_HSD_DIP2": calVolofDiesel(inputData.HSD_DIP2),
         "previous": allPreviousData._id,
-        "date": new Date(),
         "next": ''
     })
     try {
         const idCurrent = await dailydata.save()
 
         if (allPreviousData._id !== '') {
-            // await Dailydata.findByIdAndUpdate({'next':''})
             const test = await Dailydata.findByIdAndUpdate(allPreviousData.id, {
                 "next": idCurrent.id
             })
-            // await test.save()
-            // console.log({test})
         }
-        response.status(201).send(dailydata)
+        response.status(201).send(dailydata, { "dateString": inputData.date  })
     } catch (e) {
         response.status(400).send(e)
     }
     mongoose.disconnect()
-    // response.send({"recived":true})
 })
 module.exports = app
-
-// app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
