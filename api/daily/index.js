@@ -18,15 +18,34 @@ const calVolofDiesel = (number) => {
     return volumneStaticData.HSD[intNumber - 1].VOLUME
 }
 
-app.get('*', (req, res) => {
+app.get('*', async (req, res) => {
     mongoose.connect(process.env.MONGODB_URL, {
         useFindAndModify: false,
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true
     });
-    mongoose.disconnect()
-    res.send('Api Chal rahi hai')
+    const sort = {}
+    if (req.query.sortBy) {
+        const parts = req.query.sortBy.split(':')
+        sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
+    }
+    // console.log(sort)
+    try {
+        const data = await Dailydata.find(
+            {}, null, {
+            limit: parseInt(req.query.limit),
+            skip: parseInt(req.query.skip),
+            sort
+        }
+        )
+        mongoose.disconnect()
+        res.status(200).send(data)
+
+    } catch (e) {
+        mongoose.disconnect()
+        res.status(500).send()
+    }
 })
 
 
@@ -73,7 +92,7 @@ app.post('*', async (request, response) => {
                 "next": idCurrent.id
             })
         }
-        response.status(201).send(dailydata, { "dateString": inputData.date  })
+        response.status(201).send(dailydata)
     } catch (e) {
         response.status(400).send(e)
     }
