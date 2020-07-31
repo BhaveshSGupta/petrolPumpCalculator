@@ -135,7 +135,6 @@ const Daily = () => {
         }}
       >
         <Form>
-          <button type="submit">Submit</button>
           <DatePickerField name="date" />
           <label htmlFor="MS">MS</label>
           <Field name="MS" type="text" />
@@ -232,6 +231,7 @@ const Daily = () => {
           </label>
           <Field name="Testing_HSD_Dispenser_3_Nozle_2" type="text" />
           <ErrorMessage name="Testing_HSD_Dispenser_3_Nozle_2" />
+          <button type="submit">Submit</button>
         </Form>
       </Formik>
     </div>
