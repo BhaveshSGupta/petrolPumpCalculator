@@ -2,12 +2,13 @@ import React, { useState } from "react"
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import "./daily.css"
 import * as Yup from "yup"
-import DatePicker from "react-datepicker"
+import { DatePickerField } from "./components/DatePicker"
 import "react-datepicker/dist/react-datepicker.css"
+
 const Daily = () => {
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
-  const [startDate, setStartDate] = useState(new Date())
+  // const [startDate, setStartDate] = useState(new Date())
   return (
     <div>
       <Formik
@@ -33,7 +34,7 @@ const Daily = () => {
           Testing_HSD_Dispenser_2_Nozle_2: "15",
           Testing_HSD_Dispenser_3_Nozle_1: "15",
           Testing_HSD_Dispenser_3_Nozle_2: "15",
-          startDate
+          date: Date.now()
         }}
         validationSchema={Yup.object({
           MS: Yup.number()
@@ -114,6 +115,7 @@ const Daily = () => {
             .positive("Cannot be Negative"),
         })}
         onSubmit={async values => {
+          console.log({ sumbitvalues: values })
           fetch("/api/daily", {
             method: "POST",
             body: JSON.stringify(values),
@@ -123,6 +125,7 @@ const Daily = () => {
           })
             .then(res => res.json())
             .then(res => {
+              console.log({ response: res })
               alert(`Volume of MS:${res.Volume_in_MS} 
             Volume of HSD1:${res.Volume_in_HSD_DIP1}
             Volume of HSD2:${res.Volume_in_HSD_DIP1}`)
@@ -132,13 +135,8 @@ const Daily = () => {
         }}
       >
         <Form>
-          <DatePicker
-            dateFormat="dd/MMMM/yyyy"
-            maxDate={new Date()}
-            selected={startDate}
-            todayButton="Today's"
-            onChange={date => setStartDate(date)}
-          />
+          <button type="submit">Submit</button>
+          <DatePickerField name="date" />
           <label htmlFor="MS">MS</label>
           <Field name="MS" type="text" />
           <ErrorMessage name="MS" />
@@ -234,8 +232,6 @@ const Daily = () => {
           </label>
           <Field name="Testing_HSD_Dispenser_3_Nozle_2" type="text" />
           <ErrorMessage name="Testing_HSD_Dispenser_3_Nozle_2" />
-
-          <button type="submit">Submit</button>
         </Form>
       </Formik>
     </div>
