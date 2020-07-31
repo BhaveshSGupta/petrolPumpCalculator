@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import "./daily.css"
 import * as Yup from "yup"
@@ -34,7 +34,7 @@ const Daily = () => {
           Testing_HSD_Dispenser_2_Nozle_2: "15",
           Testing_HSD_Dispenser_3_Nozle_1: "15",
           Testing_HSD_Dispenser_3_Nozle_2: "15",
-          date: Date.now()
+          date: Date.now(),
         }}
         validationSchema={Yup.object({
           MS: Yup.number()
@@ -135,6 +135,7 @@ const Daily = () => {
         }}
       >
         <Form>
+          <label htmlFor="date">Date</label>
           <DatePickerField name="date" />
           <label htmlFor="MS">MS</label>
           <Field name="MS" type="text" />
