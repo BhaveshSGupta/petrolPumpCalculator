@@ -1,4 +1,16 @@
-const result = {
+const parser = require("convert-excel-to-json");
+const path = require("path");
+
+const result = parser({
+  sourceFile: path.join(__dirname, "../data/Dipchart.xlsx"),
+  header: {
+    rows: 1
+  },
+  columnToKey: {
+    "*": "{{columnHeader}}"
+  }
+});
+const convertedData = {
   "MS": [
     {
       "DIP": 1,
@@ -2164,4 +2176,4 @@ const result = {
     }
   ]
 }
-module.exports = result;
+module.exports =  convertedData

@@ -3,6 +3,7 @@ const Dailydata = require("../models/dailyData")
 const app = require("../app")
 const mongoose = require("mongoose")
 const calVolofPetrol = (number) => {
+    console.log(volumneStaticData)
     const intNumber = parseInt(number)
     if (intNumber < number) {
         return (number - intNumber) * 10 * volumneStaticData.MS[intNumber - 1].DIFFERENCE + volumneStaticData.MS[intNumber - 1].VOLUME
