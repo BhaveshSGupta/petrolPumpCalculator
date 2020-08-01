@@ -14,7 +14,6 @@ app.get('*', async (req, res) => {
         const parts = req.query.sortBy.split(':')
         sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
     }
-    // console.log(sort)
     try {
         const data = await Dailydata.find(
             {}, null, {
