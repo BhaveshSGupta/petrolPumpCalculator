@@ -6,6 +6,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  NavLink,
   Link,
   useRouteMatch,
   useParams
@@ -18,10 +19,10 @@ export default function App() {
       <div>
         <ul>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink>
           </li>
           <li>
-            <Link to="/daily">Daily</Link>
+            <NavLink to="/daily" activeClassName="active">Daily</NavLink>
           </li>
         </ul>
 
