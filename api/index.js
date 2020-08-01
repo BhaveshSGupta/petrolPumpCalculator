@@ -2,7 +2,7 @@ const Dailydata = require("../models/dailyData")
 const app = require("../app")
 const mongoose = require("mongoose")
 
-app.get('*', async (req, res) => {
+app.get('/api/dashboard', async (req, res) => {
     mongoose.connect(process.env.MONGODB_URL, {
         useFindAndModify: false,
         useNewUrlParser: true,
