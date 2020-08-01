@@ -1,8 +1,9 @@
-const Dailydata = require("../models/dailyData")
+const Models = { dailyData } = require("../models")
 const app = require("../app")
 const mongoose = require("mongoose")
 
-app.get('/api/dashboard', async (req, res) => {
+app.get('*', async (req, res) => {
+    console.log("here")
     mongoose.connect(process.env.MONGODB_URL, {
         useFindAndModify: false,
         useNewUrlParser: true,
@@ -15,7 +16,7 @@ app.get('/api/dashboard', async (req, res) => {
         sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
     }
     try {
-        const data = await Dailydata.find(
+        const data = await Models.dailyData.find(
             {}, null, {
             limit: parseInt(req.query.limit),
             skip: parseInt(req.query.skip),
