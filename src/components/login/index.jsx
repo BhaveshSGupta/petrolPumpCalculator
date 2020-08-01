@@ -10,7 +10,7 @@ const styles = theme => ({
     }
 });
 
-class LoginTab extends React.Component {
+class Login extends React.Component {
     render() {
         const { classes } = this.props;
         return (
@@ -53,4 +53,4 @@ class LoginTab extends React.Component {
     }
 }
 
-export default withStyles(styles)(LoginTab);
+export default withStyles(styles)(Login);
