@@ -1,5 +1,5 @@
 const volumneStaticData = require("../excelConverter")
-const Dailydata = require("../models/dailyData")
+const Models = { dailyData } = require("../models/")
 const app = require("../app")
 const mongoose = require("mongoose")
 const calVolofPetrol = (number) => {
@@ -33,7 +33,7 @@ app.get('*', async (req, res) => {
     }
     // console.log(sort)
     try {
-        const data = await Dailydata.find(
+        const data = await Models.dailyData.find(
             {}, null, {
             limit: parseInt(req.query.limit),
             skip: parseInt(req.query.skip),
@@ -64,7 +64,7 @@ app.post('*', async (request, response) => {
     }
     let allPreviousData = {}
     try {
-        allPreviousData = await Dailydata.findOne({
+        allPreviousData = await Models.dailyData.findOne({
             'next': ''
         })
         if (!allPreviousData) {
@@ -74,7 +74,7 @@ app.post('*', async (request, response) => {
     } catch {
         allPreviousData._id = ''
     }
-    const dailydata = new Dailydata({
+    const dailydata = new Models.dailyData({
         ...request.body,
         "Volume_in_MS": (calVolofPetrol(inputData.MS_DIP)).toFixed(0),
         "Volume_in_HSD_DIP1": (calVolofDiesel(inputData.HSD_DIP1)).toFixed(0),
@@ -89,7 +89,7 @@ app.post('*', async (request, response) => {
         const idCurrent = await dailydata.save()
 
         if (allPreviousData._id !== '') {
-            const test = await Dailydata.findByIdAndUpdate(allPreviousData.id, {
+            const test = await Models.dailyData.findByIdAndUpdate(allPreviousData.id, {
                 "next": idCurrent.id
             })
         }
