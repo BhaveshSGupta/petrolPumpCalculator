@@ -3,7 +3,7 @@ const app = require("../app")
 const mongoose = require("mongoose")
 
 app.get('*', async (req, res) => {
-    console.log("here")
+    // console.log("here")
     mongoose.connect(process.env.MONGODB_URL, {
         useFindAndModify: false,
         useNewUrlParser: true,

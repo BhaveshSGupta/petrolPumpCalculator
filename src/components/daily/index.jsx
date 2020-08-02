@@ -115,7 +115,7 @@ const Daily = () => {
             .positive("Cannot be Negative"),
         })}
         onSubmit={async values => {
-          console.log({ sumbitvalues: values })
+          // console.log({ sumbitvalues: values })
           fetch("/api/daily", {
             method: "POST",
             body: JSON.stringify(values),
@@ -125,7 +125,7 @@ const Daily = () => {
           })
             .then(res => res.json())
             .then(res => {
-              console.log({ response: res })
+              // console.log({ response: res })
               alert(`Volume of MS:${res.Volume_in_MS} 
             Volume of HSD1:${res.Volume_in_HSD_DIP1}
             Volume of HSD2:${res.Volume_in_HSD_DIP1}`)
