@@ -1,8 +1,16 @@
 {
-    "routes": [
-      { "src": "/api/dashboard", "dest": "/api" },
-      { "src": "/users", "methods": ["GET"], "dest": "/api.js" },
-      { "src": "/(.*)", "status": 404, "dest": "/other-404.html" }
-    ]
-  }
-  
+  "routes": [
+    {
+      "src": "/api/dashboard.js",
+      "methods": [
+        "POST",
+        "GET"
+      ],
+      "dest": "/api.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}
