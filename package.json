@@ -16,6 +16,7 @@
     "react-query": "^2.5.13",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "swr": "^0.3.0",
     "tailwindcss": "1.5.1",
     "yup": "^0.29.1"
   },
