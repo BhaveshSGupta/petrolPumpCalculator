@@ -37,7 +37,7 @@ app.put('/api/users', async (req, res) => {
                     Number(new Date()) +
                     24 * 60 * 60 * 1000
                 ),
-                httpOnly: true,
+                httpOnly: false,
             });
             // res.redirect('\dashboard')
             res.send({
