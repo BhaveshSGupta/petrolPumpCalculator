@@ -1,6 +1,7 @@
 import React from "react"
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import "./daily.css"
+import { NavLink } from "react-router-dom"
 import * as Yup from "yup"
 import { DatePickerField } from "./components/DatePicker"
 import "react-datepicker/dist/react-datepicker.css"
@@ -11,6 +12,17 @@ const Daily = () => {
   // const [startDate, setStartDate] = useState(new Date())
   return (
     <div>
+    <h1>Daily</h1>
+    <div>
+        <ul>
+          <li>
+            <NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink>
+          </li>
+          <li>
+            <NavLink to="/daily" activeClassName="active">Daily</NavLink>
+          </li>
+        </ul>
+      </div>
       <Formik
         initialValues={{
           MS: "",
