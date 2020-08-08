@@ -2,8 +2,7 @@
 // const app = new express.Router()
 const app = require("../app")
 const { User } = require('../models')
-const mongoose = require('mongoose')
-const auth = require('../authentication/index')
+const auth = require('../authentication')
 const multer = require('multer')
 const sharp = require('sharp')
 const {
@@ -11,7 +10,7 @@ const {
     disconnect
 } = require('../utils')
 
-app.get('/api/users', async (req, res) => {
+app.put('/api/users', async (req, res) => {
     connect()
     if (!!req.body.signup) {
         process.env.NODE_ENV === "development" && console.log("signup")
@@ -33,6 +32,14 @@ app.get('/api/users', async (req, res) => {
         try {
             const user = await User.findByCredential(req.body.email, req.body.password)
             const token = await user.generateAuthToken()
+            res.cookie("accessToken", token, {
+                expires: new Date(
+                    Number(new Date()) +
+                    24 * 60 * 60 * 1000
+                ),
+                httpOnly: true,
+            });
+            // res.redirect('\dashboard')
             res.send({
                 user,
                 token
