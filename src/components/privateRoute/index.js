@@ -1,11 +1,9 @@
 import React from "react"
 import { Redirect, Route } from "react-router-dom"
-const fakeAuth = {}
-fakeAuth.isAuthenticated = false
+import auth from '../../services/auth'
 
 function PrivateRoute({ component: Component, ...rest }) {
-  const getUser = () => (window.localStorage.loggedIn)
-  const auth = !!getUser() && JSON.parse(window.localStorage.loggedIn)
+
   // console.log({ auth })
   return (
     <Route
