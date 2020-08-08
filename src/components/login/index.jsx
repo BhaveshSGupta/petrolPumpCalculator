@@ -3,7 +3,6 @@ import { Formik, Field, Form, ErrorMessage } from "formik"
 import HandleLogin from "../../services/handlelogin"
 const Login = () => {
   return (
-    //
     <div>
       <Formik
         initialValues={{
