@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 const { User } = require('../models')
-const passport = require('passport')
 const {
   connect,
   disconnect
