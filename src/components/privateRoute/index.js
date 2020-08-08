@@ -4,8 +4,8 @@ const fakeAuth = {}
 fakeAuth.isAuthenticated = false
 
 function PrivateRoute({ component: Component, ...rest }) {
-  const getUser = () => (JSON.parse(window.localStorage.loggedIn))
-  const auth = getUser()
+  const getUser = () => (window.localStorage.loggedIn)
+  const auth = !!getUser() && JSON.parse(window.localStorage.loggedIn)
   // console.log({ auth })
   return (
     <Route

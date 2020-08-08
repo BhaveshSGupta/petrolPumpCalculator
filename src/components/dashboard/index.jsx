@@ -1,9 +1,14 @@
 import React from "react"
 import useSWR from "swr"
 import { NavLink } from "react-router-dom"
-
+import {getCookie} from '../../utils/cookies'
 const Dashboard = () => {
-  const fetcher = url => fetch(url).then(res => res.json())
+  const fetcher = url =>
+    fetch(url, {
+      headers: {
+        Authorization:getCookie("accessToken").value
+      },
+    }).then(res => res.json())
   const { data = [], error } = useSWR(
     "/api/dashboard?limit=5&sortBy=date:desc",
     fetcher
