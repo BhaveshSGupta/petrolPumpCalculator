@@ -11,36 +11,23 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
-
+import PrivateRoute from './components/privateRoute'
 
 export default function App() {
   return (
     <Router>
-      <div>
-        <ul>
-          <li>
-            <NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink>
-          </li>
-          <li>
-            <NavLink to="/daily" activeClassName="active">Daily</NavLink>
-          </li>
-        </ul>
-
-        <Switch>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route path="/topics">
-            <Topics />
-          </Route>
-          <Route path="/daily">
-            <Daily />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
+      <Switch>
+        <PrivateRoute path="/dashboard" component={Dashboard} />
+        <Route path="/topics">
+          <Topics />
+        </Route>
+        <Route path="/daily">
+          <Daily />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
     </Router>
   );
 }
