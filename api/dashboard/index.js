@@ -1,8 +1,9 @@
 const Models = { dailyData } = require("../models")
 const app = require("../app")
 const mongoose = require("mongoose")
+const auth = require('../authentication')
 
-app.get('*', async (req, res) => {
+app.get('*', auth, async (req, res) => {
     // console.log("here")
     mongoose.connect(process.env.MONGODB_URL, {
         useFindAndModify: false,
