@@ -1,10 +1,10 @@
 const ApiUrl = '/api/users'
-const setUser = user => (window.localStorage.veUser = JSON.stringify(user))
-
-const handleLogin = async ({ email, password }) => {
+const setUser = user => (window.localStorage.loggedIn = JSON.stringify(user))
+const HandleLogin = async ({ email, password }) => {
+  // const history = useHistory();
   try {
     const requestOptions = {
-      method: "GET",
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: email,
@@ -16,11 +16,12 @@ const handleLogin = async ({ email, password }) => {
       requestOptions
     )
     let data = await response.json()
-    if (data && data.status === 200) {
+    console.log(response.status)
+    if (data.token && response.status === 200) {
       setUser({
         isLoggedIn: true,
       })
-
+      window.location.href = "/dashboard"
     } else {
 
     }
@@ -28,4 +29,4 @@ const handleLogin = async ({ email, password }) => {
     console.log(e)
   }
 }
-export default handleLogin
+export default HandleLogin
