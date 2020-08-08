@@ -1,17 +1,17 @@
 import React from "react"
 import { Formik, Field, Form, ErrorMessage } from "formik"
-import handlelogin from "../../services/handlelogin"
+import HandleLogin from "../../services/handlelogin"
 const Login = () => {
   return (
     //
     <div>
       <Formik
         initialValues={{
-          passowrd: "",
+          password: "",
           email: "",
         }}
-        onSubmit={values => {
-          handlelogin(...values)
+        onSubmit={async values => {
+          HandleLogin(values)
         }}
       >
         <Form>
