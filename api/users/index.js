@@ -1,7 +1,8 @@
 // const express = require('express')
 // const app = new express.Router()
 const app = require("../app")
-const User = require('../models/user')
+const { User } = require('../models')
+const mongoose = require('mongoose')
 const auth = require('../authentication/index')
 const multer = require('multer')
 const sharp = require('sharp')
@@ -10,56 +11,58 @@ const {
     disconnect
 } = require('../utils')
 
-// const {
-//     sendWelcomeEmail,
-//     sendCancelationEmail
-// } = require('../emails/account')
-
-app.post('/api/users', async (req, res) => {
+app.get('/api/users', async (req, res) => {
     connect()
-    const user = new User(req.body)
+    if (!!req.body.signup) {
+        process.env.NODE_ENV === "development" && console.log("signup")
+        const user = new User(req.body)
 
-    try {
-        await user.save()
-        // sendWelcomeEmail(user.email, user.name)
-        const token = await user.generateAuthToken()
-        res.status(201).send({
-            user,
-            token
-        })
-    } catch (e) {
-        res.status(400).send(e)
+        try {
+            await user.save()
+            // sendWelcomeEmail(user.email, user.name)
+            const token = await user.generateAuthToken()
+            res.status(201).send({
+                user,
+                token
+            })
+        } catch (e) {
+            res.status(400).send(e)
+        }
+    } else {
+        process.env.NODE_ENV === "development" && console.log("login")
+        try {
+            const user = await User.findByCredential(req.body.email, req.body.password)
+            const token = await user.generateAuthToken()
+            res.send({
+                user,
+                token
+            })
+        } catch {
+            res.status(400).send()
+        }
     }
     disconnect()
 })
 
-app.post('/api/users/login', async (req, res) => {
-    try {
-        const user = await User.findByCredential(req.body.email, req.body.password)
-        const token = await user.generateAuthToken()
-        res.send({
-            user,
-            token
-        })
-    } catch {
-        res.status(400).send()
+
+app.post('/api/users', auth, async (req, res) => {
+    const user = await User.findById(req.user._id)
+    if (!!req.body.logout) {
+        process.env.NODE_ENV === "development" && console.log('logout')
+        try {
+            user.tokens = user.tokens.filter((token) => {
+                return token.token !== req.token
+            })
+            await user.save()
+            // const user1 = await User.findById(req.user._id)
+            res.status(200).send()
+        } catch (e) {
+            res.status(500).send(e)
+
+        }
+        disconnect('logout')
     }
-})
 
-app.post('/api/users/logout', auth, async (req, res) => {
-    try {
-        req.user.tokens = req.user.tokens.filter((token) => {
-            return token.token !== req.token
-        })
-        await req.user.save()
-
-        res.send()
-
-    } catch (e) {
-
-        res.status(500).send()
-
-    }
 })
 
 app.post('/api/users/logoutAll', auth, async (req, res) => {
@@ -101,7 +104,7 @@ app.patch('/api/users/me', auth, async (req, res) => {
     }
 })
 
-app.delete('/api/users/me', auth, async (req, res) => {
+app.delete('post', auth, async (req, res) => {
 
     try {
         // sendCancelationEmail(req.user.email, req.user.name)
