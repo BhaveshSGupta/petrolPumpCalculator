@@ -1,12 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import { Redirect } from "react-router-dom"
 // import HandleLogin from "../../services/handlelogin"
 const Login = props => {
+  useEffect(() => {
+    return () => {}
+  }, [])
   const [redirect, setredirect] = useState(false)
   const ApiUrl = "/api/users"
-  const setUser = user =>
-    window.localStorage.setItem("loggedIn", JSON.stringify(user))
   const HandleLogin = async ({ email, password }) => {
     // const history = useHistory();
     try {
@@ -32,19 +33,10 @@ const Login = props => {
             return { body: "hello", status: response.status }
           }
         })
-        // .then(({ body, status }) => {
-        //   if (body.token && status === 200) {
-
-        //   } else {
-
-        //   }
-        // })
         .then(() => {
           setredirect(true)
         })
-    } catch (e) {
-      // console.log(e)
-    }
+    } catch (e) {}
   }
   return (
     <div>
@@ -56,30 +48,32 @@ const Login = props => {
           }}
         />
       )}
-      <Formik
-        initialValues={{
-          password: "",
-          email: "",
-        }}
-        onSubmit={async values => {
-          HandleLogin(values)
-        }}
-      >
-        <Form>
-          <label htmlFor="email">Email</label>
-          <Field
-            id="email"
-            name="email"
-            placeholder="jane@acme.com"
-            type="email"
-          />
-          <ErrorMessage name="email" />
-          <label htmlFor="password">password</label>
-          <Field name="password" type="password" />
-          <ErrorMessage name="password" />
-          <button type="submit">Submit</button>
-        </Form>
-      </Formik>
+      {!redirect && (
+        <Formik
+          initialValues={{
+            password: "",
+            email: "",
+          }}
+          onSubmit={async values => {
+            HandleLogin(values)
+          }}
+        >
+          <Form>
+            <label htmlFor="email">Email</label>
+            <Field
+              id="email"
+              name="email"
+              placeholder="jane@acme.com"
+              type="email"
+            />
+            <ErrorMessage name="email" />
+            <label htmlFor="password">password</label>
+            <Field name="password" type="password" />
+            <ErrorMessage name="password" />
+            <button type="submit">Submit</button>
+          </Form>
+        </Formik>
+      )}{" "}
     </div>
   )
 }
