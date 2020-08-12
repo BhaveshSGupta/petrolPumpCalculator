@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import { Redirect } from "react-router-dom"
 // import HandleLogin from "../../services/handlelogin"
 const Login = props => {
-  useEffect(() => {
-    return () => {}
-  }, [])
   const [redirect, setredirect] = useState(false)
   const ApiUrl = "/api/users"
   const HandleLogin = async ({ email, password }) => {
