@@ -4,12 +4,12 @@ import { isAuthenticated } from '../../services/auth'
 
 function PrivateRoute({ component: Component, ...rest }) {
 
-  // console.log({ auth })
+  // console.log({ isAuthenticated })
   return (
     <Route
       {...rest}
       render={props =>
-        isAuthenticated ? (
+        isAuthenticated() ? (
           <Component {...props} />
         ) : (
             <Redirect
