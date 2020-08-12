@@ -11,13 +11,15 @@ const Dashboard = props => {
         Authorization: getCookie("accessToken").value,
       },
     })
-      .then(res => {
-        if (!res.ok) localStorage.setItem("loggedIn", "")
-        return res
+      .then(async response => {
+        if (response.status === 401) {
+          localStorage.setItem("loggedIn", "")
+          setredirect(true)
+        }
+        return await response.json()
       })
-      .then(res => res.json())
       .catch(error => {
-        error.json().then(body => {
+        error.json().then(() => {
           setredirect(true)
         })
       })
