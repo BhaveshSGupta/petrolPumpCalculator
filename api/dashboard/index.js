@@ -1,16 +1,8 @@
 const Models = { dailyData } = require("../models")
-const app = require("../app")
-const mongoose = require("mongoose")
-const auth = require('../authentication')
+const { app, auth, connect, disconnect } = require('../utils')
 
 app.get('*', auth, async (req, res) => {
-    // console.log("here")
-    mongoose.connect(process.env.MONGODB_URL, {
-        useFindAndModify: false,
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true
-    });
+    connect('dashboard')
     const sort = {}
     if (req.query.sortBy) {
         const parts = req.query.sortBy.split(':')
@@ -24,11 +16,11 @@ app.get('*', auth, async (req, res) => {
             sort
         }
         ).select('date')
-        mongoose.disconnect()
+        disconnect('dashboard')
         res.status(200).send(data)
 
     } catch (e) {
-        mongoose.disconnect()
+        disconnect('dashboard')
         res.status(500).send()
     }
 })

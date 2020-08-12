@@ -1,7 +1,7 @@
-const volumneStaticData = require("../excelConverter")
+const { convertedData: volumneStaticData, app, connect, disconnect } = require("../utils")
 const { dailyData } = require("../models/")
-const app = require("../app")
 const mongoose = require("mongoose")
+
 const calVolofPetrol = (number) => {
     const intNumber = parseInt(number)
     if (intNumber < number) {
@@ -19,18 +19,12 @@ const calVolofDiesel = (number) => {
 }
 
 app.get('*', async (req, res) => {
-    mongoose.connect(process.env.MONGODB_URL, {
-        useFindAndModify: false,
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true
-    });
+    connect('Daily')
     const sort = {}
     if (req.query.sortBy) {
         const parts = req.query.sortBy.split(':')
         sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
     }
-    // console.log(sort)
     try {
         const data = await dailyData.find(
             {}, null, {
@@ -39,11 +33,11 @@ app.get('*', async (req, res) => {
             sort
         }
         )
-        mongoose.disconnect()
+        disconnect('daily')
         res.status(200).send(data)
 
     } catch (e) {
-        mongoose.disconnect()
+        disconnect('dailyCatch')
         res.status(500).send()
     }
 })
@@ -51,12 +45,7 @@ app.get('*', async (req, res) => {
 
 app.post('*', async (request, response) => {
 
-    mongoose.connect(process.env.MONGODB_URL, {
-        useFindAndModify: false,
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true
-    });
+    connect('Daily')
 
     const inputData = {
         ...request.body
@@ -96,6 +85,6 @@ app.post('*', async (request, response) => {
     } catch (e) {
         response.status(400).send(e)
     }
-    mongoose.disconnect()
+    disconnect('dailyCatch')
 })
 module.exports = app
