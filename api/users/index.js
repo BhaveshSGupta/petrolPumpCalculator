@@ -1,14 +1,7 @@
-// const express = require('express')
-// const app = new express.Router()
-const app = require("../app")
 const { User } = require('../models')
-const auth = require('../authentication')
 const multer = require('multer')
 const sharp = require('sharp')
-const {
-    connect,
-    disconnect
-} = require('../utils')
+const { connect, disconnect, app, auth } = require('../utils')
 
 app.put('/api/users', async (req, res) => {
     connect()
@@ -38,8 +31,7 @@ app.put('/api/users', async (req, res) => {
                     24 * 60 * 60 * 1000
                 ),
                 httpOnly: false,
-            });
-            // res.redirect('\dashboard')
+            })
             res.send({
                 user,
                 token
@@ -61,7 +53,6 @@ app.post('/api/users', auth, async (req, res) => {
                 return token.token !== req.token
             })
             await user.save()
-            // const user1 = await User.findById(req.user._id)
             res.status(200).send()
         } catch (e) {
             res.status(500).send(e)
