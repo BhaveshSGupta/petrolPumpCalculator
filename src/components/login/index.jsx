@@ -1,12 +1,11 @@
 import React, { useState } from "react"
-import { Formik, Field, Form, ErrorMessage } from "formik"
+import { Formik } from "formik"
 import { Redirect } from "react-router-dom"
-// import HandleLogin from "../../services/handlelogin"
+import { Box, Button, FormField, TextInput } from "grommet"
 const Login = props => {
   const [redirect, setredirect] = useState(false)
   const ApiUrl = "/api/users"
   const HandleLogin = async ({ email, password }) => {
-    // const history = useHistory();
     try {
       const requestOptions = {
         method: "PUT",
@@ -16,23 +15,22 @@ const Login = props => {
           password: password,
         }),
       }
-      fetch(ApiUrl, requestOptions)
-        .then(async response => {
-          if (response.status === 200) {
-            window.localStorage.setItem(
-              "loggedIn",
-              JSON.stringify({
-                isLoggedIn: true,
-              })
-            )
-            return { body: await response.json(), status: response.status }
-          } else {
-            return { body: "hello", status: response.status }
-          }
-        })
-        .then(() => {
+      fetch(ApiUrl, requestOptions).then(async response => {
+        if (response.status === 200) {
+          window.localStorage.setItem(
+            "loggedIn",
+            JSON.stringify({
+              isLoggedIn: true,
+            })
+          )
+          const data = await response.json()
           setredirect(true)
-        })
+          return { body: data, status: response.status }
+        }
+        if (response.status === 200) {
+          return { body: "hello", status: response.status }
+        }
+      })
     } catch (e) {}
   }
   return (
@@ -51,28 +49,83 @@ const Login = props => {
             password: "",
             email: "",
           }}
+          validate={values => {
+            const errors = {}
+            if (!values.email) {
+              errors.email = "required"
+            }
+            if (!values.password) {
+              errors.password = "required"
+            }
+            return errors
+          }}
           onSubmit={async values => {
             HandleLogin(values)
           }}
         >
-          <Form>
-            <label htmlFor="email">Email</label>
-            <Field
-              id="email"
-              name="email"
-              placeholder="jane@acme.com"
-              type="email"
-            />
-            <ErrorMessage name="email" />
-            <label htmlFor="password">password</label>
-            <Field name="password" type="password" />
-            <ErrorMessage name="password" />
-            <button type="submit">Submit</button>
-          </Form>
+          {({
+            values,
+            errors,
+            handleChange,
+            handleSubmit,
+            setFieldValue,
+            handleBlur,
+            touched,
+          }) => (
+            <form
+              onSubmit={event => {
+                event.preventDefault()
+                handleSubmit()
+              }}
+            >
+              <FormField
+                label="Email"
+                error={!!touched.email && errors.email}
+                required
+              >
+                <TextInput
+                  type="email"
+                  name="email"
+                  value={values.email || ""}
+                  onChange={value => {
+                    handleChange(value)
+                    console.log(touched)
+                  }}
+                  onBlur={handleBlur}
+                />
+              </FormField>
+              <FormField
+                label="Password"
+                error={!!touched.password && errors.password}
+                required
+              >
+                <TextInput
+                  type="password"
+                  name="password"
+                  onBlur={handleBlur}
+                  value={values.password || ""}
+                  onChange={value => {
+                    handleChange(value)
+                    console.log(touched)
+                  }}
+                />
+              </FormField>
+              <Box
+                tag="footer"
+                margin={{ top: "medium" }}
+                direction="row"
+                justify="between"
+              >
+                <Button label="Cancel" />
+                <Button type="submit" primary label="Create" />
+              </Box>
+            </form>
+          )}
         </Formik>
-      )}{" "}
+      )}
     </div>
   )
 }
 
 export default Login
+// TODO:Error Handling for incorrect input

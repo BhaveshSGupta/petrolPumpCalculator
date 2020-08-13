@@ -1,11 +1,11 @@
 import React from "react"
 import Login from "../login"
-
+import { Box } from "grommet"
 const Home = () => {
   return (
-    <div>
+    <Box fill align="center" justify="center">
       <Login />
-    </div>
+    </Box>
   )
 }
 

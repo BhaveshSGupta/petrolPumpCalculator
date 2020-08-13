@@ -1,0 +1,118 @@
+import React, { useState } from "react"
+import {
+  Box,
+  Button,
+  Heading,
+  Grommet,
+  Collapsible,
+  Layer,
+  Header,
+  Footer,
+  Avatar,
+  Text,
+  Nav,
+  Anchor,
+  ResponsiveContext,
+} from "grommet"
+import { Notification, FormClose, Logout } from "grommet-icons"
+import { isAuthenticated } from "../../services/auth"
+const theme = {
+  global: {
+    colors: {
+      brand: "#228BE6",
+    },
+    font: {
+      family: "Roboto",
+      size: "18px",
+      height: "20px",
+    },
+  },
+}
+const Layout = props => {
+  const gravatarLink =
+    "//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80"
+  const [showSidebar, setShowSidebar] = useState(false)
+  return (
+    <Grommet theme={theme} full>
+      <ResponsiveContext.Consumer>
+        {size => (
+          <Box fill>
+            <Header background="brand" pad="small">
+              <Heading level="3" margin="none">
+                Petrol Pump Calculations
+              </Heading>
+              {isAuthenticated() && (
+                <>
+                  <Nav direction="row">
+                    {/* <Anchor label="Home" href="#" /> */}
+                    <Anchor href="#">
+                      <Avatar src={gravatarLink} />
+                    </Anchor>
+                    <Button
+                      icon={<Notification />}
+                      onClick={() => setShowSidebar(!showSidebar)}
+                    />
+                    <Button
+                      icon={<Logout />}
+                      onClick={() => alert("Need to work on logout")}
+                    />
+                  </Nav>
+                </>
+              )}
+            </Header>
+            <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
+              {isAuthenticated() &&
+                (showSidebar || size !== "small" ? (
+                  <Collapsible direction="horizontal" open={showSidebar}>
+                    <Box
+                      width="medium"
+                      background="light-2"
+                      flex
+                      elevation="small"
+                      align="center"
+                      justify="center"
+                    >
+                      sidebar
+                    </Box>
+                  </Collapsible>
+                ) : (
+                  <Layer>
+                    <Box
+                      background="light-2"
+                      tag="header"
+                      justify="end"
+                      align="center"
+                      direction="row"
+                    >
+                      <Button
+                        icon={<FormClose />}
+                        onClick={() => setShowSidebar(false)}
+                      />
+                    </Box>
+                    <Box
+                      fill
+                      background="light2"
+                      align="center"
+                      justify="center"
+                    >
+                      sidebar
+                    </Box>
+                  </Layer>
+                ))}
+
+              <Box flex align="start" justify="start">
+                {props.children}
+              </Box>
+            </Box>
+            <Footer background="brand" pad="medium">
+              <Text>Copyright</Text>
+              <Anchor label="About" />
+            </Footer>
+          </Box>
+        )}
+      </ResponsiveContext.Consumer>
+    </Grommet>
+  )
+}
+
+export default Layout
