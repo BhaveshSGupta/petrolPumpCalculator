@@ -1,6 +1,9 @@
-const { convertedData: volumneStaticData, app, connect, disconnect } = require("../utils")
-const { dailyData } = require("../models/")
-const mongoose = require("mongoose")
+const { convertedData: volumneStaticData, connect, disconnect } = require("../utils")
+const dailyData = require("../models/daily")
+const app = require('../app')
+const auth = require('../authentication')
+const { connect, disconnect } = require('../utils')
+
 
 const calVolofPetrol = (number) => {
     const intNumber = parseInt(number)

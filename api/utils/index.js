@@ -1,9 +1,6 @@
 const mongoose = require("mongoose")
 const parser = require("convert-excel-to-json");
 const path = require("path");
-const jwt = require('jsonwebtoken')
-const { User } = require('../models')
-const express = require("express")
 
 const connect = (from) => {
     !!from && process.env.NODE_ENV === "development" && console.log(`connected from ${from}`)
@@ -2197,36 +2194,10 @@ const convertedData = {
     ]
 }
 
-const auth = async (req, res, next) => {
-  connect('auth')
-  try {
-    const token = req.header('Authorization').replace('Bearer', '').trim()
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    const user = await User.findOne({ _id: decoded._id, 'tokens.token': token }).lean()
-    if (!user) {
-      throw new Error()
-    }
-    req.token = token
-    req.user = user
-    next()
-  } catch (e) {
-    res.clearCookie("accessToken");
-    res.status(401).send({ error: 'Please authenticate.' })
-    disconnect('auth')
-  }
-
-}
-
-
-const app = express()
-app.use(express.json())
-
 
 module.exports = {
     connect,
     disconnect,
     convertedData,
-    result,
-    auth,
-    app
+    result
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { NavLink } from "react-router-dom"
 import {
   Box,
   Button,
@@ -14,6 +15,7 @@ import {
   Anchor,
   ResponsiveContext,
 } from "grommet"
+import { getCookie } from "../../utils/cookies"
 import { Notification, FormClose, Logout } from "grommet-icons"
 import { isAuthenticated } from "../../services/auth"
 const theme = {
@@ -27,6 +29,31 @@ const theme = {
       height: "20px",
     },
   },
+}
+const handleLogout = async () => {
+  try {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: getCookie("accessToken").value,
+      },
+    }
+    fetch("/api/users/logout", requestOptions).then(async response => {
+      if (response.status === 200) {
+        window.localStorage.setItem(
+          "loggedIn",
+          JSON.stringify({
+            isLoggedIn: false,
+          })
+        )
+        const data = await response.json()
+        return { body: data, status: response.status }
+      }
+      if (response.status === 200) {
+        return { body: "hello", status: response.status }
+      }
+    })
+  } catch (e) {}
 }
 const Layout = props => {
   const gravatarLink =
@@ -42,22 +69,22 @@ const Layout = props => {
                 Petrol Pump Calculations
               </Heading>
               {isAuthenticated() && (
-                <>
-                  <Nav direction="row">
-                    {/* <Anchor label="Home" href="#" /> */}
-                    <Anchor href="#">
-                      <Avatar src={gravatarLink} />
-                    </Anchor>
-                    <Button
-                      icon={<Notification />}
-                      onClick={() => setShowSidebar(!showSidebar)}
-                    />
-                    <Button
-                      icon={<Logout />}
-                      onClick={() => alert("Need to work on logout")}
-                    />
-                  </Nav>
-                </>
+                <Nav direction="row" align="center">
+                  <NavLink to="/daily" activeClassName="active">
+                    Daily
+                  </NavLink>
+                  <NavLink to="/dashboard" activeClassName="active">
+                    Dashboard
+                  </NavLink>
+                  <Anchor href="/profile">
+                    <Avatar src={gravatarLink} />
+                  </Anchor>
+                  <Button
+                    icon={<Notification />}
+                    onClick={() => setShowSidebar(!showSidebar)}
+                  />
+                  <Button icon={<Logout />} onClick={handleLogout} />
+                </Nav>
               )}
             </Header>
             <Box direction="row" flex overflow={{ horizontal: "hidden" }}>

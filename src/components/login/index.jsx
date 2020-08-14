@@ -1,14 +1,14 @@
-import React, { useState } from "react"
+import React from "react"
 import { Formik } from "formik"
-import { Redirect } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { Box, Button, FormField, TextInput } from "grommet"
-const Login = props => {
-  const [redirect, setredirect] = useState(false)
-  const ApiUrl = "/api/users"
+const Login = () => {
+  let history = useHistory()
+  const ApiUrl = "/api/users/login"
   const HandleLogin = async ({ email, password }) => {
     try {
       const requestOptions = {
-        method: "PUT",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: email,
@@ -24,7 +24,7 @@ const Login = props => {
             })
           )
           const data = await response.json()
-          setredirect(true)
+          history.push("/dashboard")
           return { body: data, status: response.status }
         }
         if (response.status === 200) {
@@ -34,96 +34,76 @@ const Login = props => {
     } catch (e) {}
   }
   return (
-    <div>
-      {redirect && (
-        <Redirect
-          to={{
-            pathname: "/dashboard",
-            state: { from: props.location },
-          }}
-        />
-      )}
-      {!redirect && (
-        <Formik
-          initialValues={{
-            password: "",
-            email: "",
-          }}
-          validate={values => {
-            const errors = {}
-            if (!values.email) {
-              errors.email = "required"
-            }
-            if (!values.password) {
-              errors.password = "required"
-            }
-            return errors
-          }}
-          onSubmit={async values => {
-            HandleLogin(values)
+    <Formik
+      initialValues={{
+        password: "",
+        email: "",
+      }}
+      validate={values => {
+        const errors = {}
+        if (!values.email) {
+          errors.email = "required"
+        }
+        if (!values.password) {
+          errors.password = "required"
+        }
+        return errors
+      }}
+      onSubmit={async values => {
+        HandleLogin(values)
+      }}
+    >
+      {({
+        values,
+        errors,
+        handleChange,
+        handleSubmit,
+        handleBlur,
+        touched,
+      }) => (
+        <form
+          onSubmit={event => {
+            event.preventDefault()
+            handleSubmit()
           }}
         >
-          {({
-            values,
-            errors,
-            handleChange,
-            handleSubmit,
-            setFieldValue,
-            handleBlur,
-            touched,
-          }) => (
-            <form
-              onSubmit={event => {
-                event.preventDefault()
-                handleSubmit()
-              }}
-            >
-              <FormField
-                label="Email"
-                error={!!touched.email && errors.email}
-                required
-              >
-                <TextInput
-                  type="email"
-                  name="email"
-                  value={values.email || ""}
-                  onChange={value => {
-                    handleChange(value)
-                    console.log(touched)
-                  }}
-                  onBlur={handleBlur}
-                />
-              </FormField>
-              <FormField
-                label="Password"
-                error={!!touched.password && errors.password}
-                required
-              >
-                <TextInput
-                  type="password"
-                  name="password"
-                  onBlur={handleBlur}
-                  value={values.password || ""}
-                  onChange={value => {
-                    handleChange(value)
-                    console.log(touched)
-                  }}
-                />
-              </FormField>
-              <Box
-                tag="footer"
-                margin={{ top: "medium" }}
-                direction="row"
-                justify="between"
-              >
-                <Button label="Cancel" />
-                <Button type="submit" primary label="Create" />
-              </Box>
-            </form>
-          )}
-        </Formik>
+          <FormField
+            label="Email"
+            error={!!touched.email && errors.email}
+            required
+          >
+            <TextInput
+              type="email"
+              name="email"
+              value={values.email || ""}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </FormField>
+          <FormField
+            label="Password"
+            error={!!touched.password && errors.password}
+            required
+          >
+            <TextInput
+              type="password"
+              name="password"
+              onBlur={handleBlur}
+              value={values.password || ""}
+              onChange={handleChange}
+            />
+          </FormField>
+          <Box
+            tag="footer"
+            margin={{ top: "medium" }}
+            direction="row"
+            justify="between"
+          >
+            <Button type="submit" primary label="Login" />
+          </Box>
+        </form>
       )}
-    </div>
+    </Formik>
   )
 }
 

@@ -1,59 +1,36 @@
-import React, { useState } from "react"
+import React from "react"
 import useSWR from "swr"
-import { NavLink } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { getCookie } from "../../utils/cookies"
-import { Redirect } from "react-router-dom"
-const Dashboard = props => {
-  const [redirect, setredirect] = useState(false)
+const Dashboard = () => {
+  let history = useHistory()
+  // const [redirect, setredirect] = useState(false)
   const fetcher = url =>
     fetch(url, {
       headers: {
         Authorization: getCookie("accessToken").value,
       },
+    }).then(async response => {
+      if (response.status === 401) {
+        localStorage.setItem("loggedIn", "")
+        // setredirect(true/)
+        mutate(null)
+        history.push("/")
+      }
+      return await response.json()
     })
-      .then(async response => {
-        if (response.status === 401) {
-          localStorage.setItem("loggedIn", "")
-          setredirect(true)
-        }
-        return await response.json()
-      })
-      .catch(error => {
-        error.json().then(() => {
-          setredirect(true)
-        })
-      })
-  const { data = [], error } = useSWR(
+  const { data = [], mutate, error } = useSWR(
     "/api/dashboard?limit=5&sortBy=date:desc",
     fetcher
   )
-  if (error) return "An error has occurred."
+  if (error) {
+    console.log(error)
+    return "An error has occurred."
+  }
   if (!data) return "Loading..."
   return (
     <div>
       <h1>Dashboard</h1>
-      {redirect && (
-        <Redirect
-          to={{
-            pathname: "/",
-            state: { from: props.location },
-          }}
-        />
-      )}
-      <div>
-        <ul>
-          <li>
-            <NavLink to="/dashboard" activeClassName="active">
-              Dashboard
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/daily" activeClassName="active">
-              Daily
-            </NavLink>
-          </li>
-        </ul>
-      </div>
       {data.length > 0 &&
         data.map((day, index) => {
           let d = new Date(day.date)

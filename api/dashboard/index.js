@@ -1,5 +1,7 @@
-const Models = { dailyData } = require("../models")
-const { app, auth, connect, disconnect } = require('../utils')
+const dailyData = require('../models/daily')
+const app = require('../app')
+const auth = require('../authentication')
+const { connect, disconnect } = require('../utils')
 
 app.get('*', auth, async (req, res) => {
     connect('dashboard')
@@ -9,9 +11,9 @@ app.get('*', auth, async (req, res) => {
         sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
     }
     try {
-        const data = await Models.dailyData.find(
+        const data = await dailyData.find(
             {}, null, {
-            limit: parseInt(req.query.limit),
+            limit: 1,
             skip: parseInt(req.query.skip),
             sort
         }
