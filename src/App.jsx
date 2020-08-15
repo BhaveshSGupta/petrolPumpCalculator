@@ -1,8 +1,4 @@
-import React from "react"
-import Daily from "./components/daily"
-import Home from "./components/home"
-import Dashboard from "./components/dashboard"
-import Layout from "./components/layout"
+import React, { Suspense, lazy } from "react"
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,6 +7,17 @@ import {
 } from "react-router-dom"
 import PrivateRoute from "./components/privateRoute"
 import { isAuthenticated } from "./services/auth"
+const Layout = lazy(() => import("./components/layout"))
+const Daily = lazy(() => import("./components/daily"))
+const Dashboard = lazy(() => import("./components/dashboard"))
+const Home = lazy(() => import("./components/home"))
+const dashboard = (
+  <Suspense fallback={<></>}>
+    <Layout>
+      <Dashboard />
+    </Layout>
+  </Suspense>
+)
 export default function App() {
   return (
     <Router>
@@ -19,16 +26,20 @@ export default function App() {
           {isAuthenticated() ? (
             <Redirect to="/dashboard" />
           ) : (
-            <Layout>
-              <Home />
-            </Layout>
+            <Suspense fallback={<></>}>
+              <Layout>
+                <Home />
+              </Layout>
+            </Suspense>
           )}
         </Route>
-        <PrivateRoute path="/dashboard" component={Dashboard}></PrivateRoute>
+        <PrivateRoute path="/dashboard" component={dashboard}></PrivateRoute>
         <Route path="/daily">
-          <Layout>
-            <Daily />
-          </Layout>
+          <Suspense fallback={<></>}>
+            <Layout>
+              <Daily />
+            </Layout>
+          </Suspense>
         </Route>
       </Switch>
     </Router>
