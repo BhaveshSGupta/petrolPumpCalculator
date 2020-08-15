@@ -1,27 +1,22 @@
 import React from "react"
 import { Redirect, Route } from "react-router-dom"
-import { isAuthenticated } from '../../services/auth'
-import Layout from "../layout"
-function PrivateRoute({ component: Component, ...rest }) {
+import { isAuthenticated } from "../../services/auth"
+function PrivateRoute({ component: Component}) {
   // console.log(Component)
   // console.log({ isAuthenticated })
   return (
     <Route
-      {...rest}
       render={props =>
         isAuthenticated() ? (
-          <Layout>
-            <Component {...props} />
-          </Layout>
-
+          Component
         ) : (
-            <Redirect
-              to={{
-                pathname: "/",
-                state: { from: props.location },
-              }}
-            />
-          )
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: props.location },
+            }}
+          />
+        )
       }
     />
   )
