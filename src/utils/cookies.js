@@ -27,3 +27,8 @@ export const getCookie = (name) => {
     }
     return null
 }
+
+export const accesstoken = () => {
+    const token = getCookie("accessToken")
+    return !!token ? token.value : ''
+}

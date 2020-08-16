@@ -1,31 +1,38 @@
 import React from "react"
 import useSWR from "swr"
 import { useHistory } from "react-router-dom"
-import { getCookie } from "../../utils/cookies"
+import { accesstoken } from "../../utils/cookies"
 const Dashboard = () => {
   let history = useHistory()
   // const [redirect, setredirect] = useState(false)
   const fetcher = url =>
     fetch(url, {
       headers: {
-        Authorization: getCookie("accessToken").value,
+        Authorization: accesstoken(),
       },
-    }).then(async response => {
-      if (response.status === 401) {
+    })
+      .then(async response => {
+        if (response.status === 401) {
+          localStorage.setItem("loggedIn", "")
+          mutate(null)
+          history.push("/")
+          return ""
+        }
+        return await response.json()
+      })
+      .catch(() => {
         localStorage.setItem("loggedIn", "")
-        // setredirect(true/)
         mutate(null)
         history.push("/")
-      }
-      return await response.json()
-    })
+        return ""
+      })
   const { data = [], mutate, error } = useSWR(
     "/api/dashboard?limit=5&sortBy=date:desc",
     fetcher
   )
   if (error) {
-    console.log(error)
-    return "An error has occurred."
+    // console.log(error)
+    return "An error has occurred please refresh"
   }
   if (!data) return "Loading..."
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useHistory } from "react-router-dom"
 import {
   Box,
   Button,
@@ -30,7 +30,7 @@ const theme = {
     },
   },
 }
-const handleLogout = async () => {
+const handleLogout = async history => {
   try {
     const requestOptions = {
       method: "POST",
@@ -46,16 +46,15 @@ const handleLogout = async () => {
             isLoggedIn: false,
           })
         )
+        history.push("/")
         const data = await response.json()
         return { body: data, status: response.status }
-      }
-      if (response.status === 200) {
-        return { body: "hello", status: response.status }
       }
     })
   } catch (e) {}
 }
 const Layout = props => {
+  let history = useHistory()
   const gravatarLink =
     "//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80"
   const [showSidebar, setShowSidebar] = useState(false)
@@ -83,7 +82,10 @@ const Layout = props => {
                     icon={<Notification />}
                     onClick={() => setShowSidebar(!showSidebar)}
                   />
-                  <Button icon={<Logout />} onClick={handleLogout} />
+                  <Button
+                    icon={<Logout />}
+                    onClick={() => handleLogout(history)}
+                  />
                 </Nav>
               )}
             </Header>
