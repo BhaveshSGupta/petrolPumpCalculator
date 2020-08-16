@@ -91,7 +91,8 @@ const Layout = props => {
             </Header>
             <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
               {isAuthenticated() &&
-                (showSidebar || size !== "small" ? (
+                showSidebar &&
+                (size !== "small" ? (
                   <Collapsible direction="horizontal" open={showSidebar}>
                     <Box
                       width="medium"
