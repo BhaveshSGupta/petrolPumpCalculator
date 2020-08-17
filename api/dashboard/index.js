@@ -3,8 +3,7 @@ const app = require('../app')
 const auth = require('../authentication')
 const { connect, disconnect } = require('../utils')
 
-app.get('*', auth, async (req, res) => {
-    connect('dashboard')
+app.get('/api/dashboard', auth, async (req, res) => {
     const sort = {}
     if (req.query.sortBy) {
         const parts = req.query.sortBy.split(':')

@@ -15,9 +15,8 @@ import {
   Anchor,
   ResponsiveContext,
 } from "grommet"
-import { getCookie } from "../../utils/cookies"
 import { Notification, FormClose, Logout } from "grommet-icons"
-import { isAuthenticated } from "../../services/auth"
+import { isAuthenticated } from "../../utils/"
 const theme = {
   global: {
     colors: {
@@ -33,10 +32,7 @@ const theme = {
 const handleLogout = async history => {
   try {
     const requestOptions = {
-      method: "POST",
-      headers: {
-        Authorization: getCookie("accessToken").value,
-      },
+      method: "POST"
     }
     fetch("/api/users/logout", requestOptions).then(async response => {
       if (response.status === 200) {
@@ -134,9 +130,8 @@ const Layout = props => {
                 {props.children}
               </Box>
             </Box>
-            <Footer background="brand" pad="medium">
-              <Text>Copyright</Text>
-              <Anchor label="About" />
+            <Footer background="brand" pad="medium" >
+              <Text size="small">Copyright</Text>
             </Footer>
           </Box>
         )}

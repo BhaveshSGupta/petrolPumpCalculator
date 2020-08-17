@@ -2,7 +2,7 @@ const User = require('../models/user')
 const app = require('../app')
 const { connect, disconnect } = require('../utils')
 
-app.post('*', async (req, res) => {
+app.post('/api/users/login', async (req, res) => {
     connect('login')
     try {
         const user = await User.findByCredential(req.body.email, req.body.password)

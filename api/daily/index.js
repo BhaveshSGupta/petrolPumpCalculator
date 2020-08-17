@@ -46,7 +46,7 @@ app.get('*', async (req, res) => {
 })
 
 
-app.post('*', async (request, response) => {
+app.post('/api/daily', auth, async (request, response) => {
 
     connect('Daily')
 
@@ -55,9 +55,7 @@ app.post('*', async (request, response) => {
     }
     let allPreviousData = {}
     try {
-        allPreviousData = await dailyData.findOne({
-            'next': ''
-        })
+        allPreviousData = await dailyData.findOne()
         if (!allPreviousData) {
             allPreviousData = {}
             allPreviousData._id = ''

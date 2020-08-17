@@ -1,10 +1,8 @@
-const User = require('../models/user')
 const app = require('../app')
-const { connect, disconnect } = require('../utils')
+const { disconnect } = require('../utils')
 const auth = require('../authentication')
 
-app.post('*', auth, async (req, res) => {
-    connect('logout')
+app.post('/api/users/logout', auth, async (req, res) => {
     process.env.NODE_ENV === "development" && console.log('logout')
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
@@ -12,7 +10,7 @@ app.post('*', auth, async (req, res) => {
         })
         await req.user.save()
         res.clearCookie("accessToken")
-        res.status(200).send()
+        res.status(200).send({ "logout": "succesful" })
     } catch (e) {
         res.status(500).send(e)
 

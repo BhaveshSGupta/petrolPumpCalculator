@@ -1,9 +1,7 @@
 import React from "react"
 import { Redirect, Route } from "react-router-dom"
-import { isAuthenticated } from "../../services/auth"
-function PrivateRoute({ component: Component}) {
-  // console.log(Component)
-  // console.log({ isAuthenticated })
+import { isAuthenticated } from "../../utils"
+function PrivateRoute({ component: Component }) {
   return (
     <Route
       render={props =>

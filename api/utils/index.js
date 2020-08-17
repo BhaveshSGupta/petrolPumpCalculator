@@ -1,5 +1,4 @@
 const mongoose = require("mongoose")
-const parser = require("convert-excel-to-json");
 const path = require("path");
 
 const connect = (from) => {
@@ -16,16 +15,6 @@ const disconnect = (from) => {
     !!from && process.env.NODE_ENV === "development" && console.log(`disconnected from ${from}`)
     mongoose.disconnect()
 }
-
-const result = parser({
-    sourceFile: path.join(__dirname, "../data/Dipchart.xlsx"),
-    header: {
-        rows: 1
-    },
-    columnToKey: {
-        "*": "{{columnHeader}}"
-    }
-})
 
 const convertedData = {
     "MS": [

@@ -12,7 +12,6 @@ const getCookies = () => {
             })
         }
     })
-    // procedebug && console.log(`cookie values are: ${JSON.stringify(cookies)}`)
     return cookies
 }
 
@@ -31,4 +30,11 @@ export const getCookie = (name) => {
 export const accesstoken = () => {
     const token = getCookie("accessToken")
     return !!token ? token.value : ''
+}
+export const isAuthenticated = () => {
+    const auth = !!window.localStorage.loggedIn && JSON.parse(window.localStorage.loggedIn)
+    const cookies = getCookie("accessToken")
+    const isAuthenticated = !!auth && auth.isLoggedIn && !!cookies
+    // console.log({ isAuthenticated, "auth.loggedIn": !!auth.isLoggedIn, "getCookie('accessToken').value": (!!cookies && getCookie("accessToken").value) })
+    return isAuthenticated
 }

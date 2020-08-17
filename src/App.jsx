@@ -6,7 +6,7 @@ import {
   Redirect,
 } from "react-router-dom"
 import PrivateRoute from "./components/privateRoute"
-import { isAuthenticated } from "./services/auth"
+import { isAuthenticated } from "./utils"
 const Layout = lazy(() => import("./components/layout"))
 const Daily = lazy(() => import("./components/daily"))
 const Dashboard = lazy(() => import("./components/dashboard"))
