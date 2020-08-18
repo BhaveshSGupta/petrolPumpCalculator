@@ -2,8 +2,6 @@ const { convertedData: volumneStaticData, connect, disconnect } = require("../ut
 const dailyData = require("../models/daily")
 const app = require('../app')
 const auth = require('../authentication')
-const { connect, disconnect } = require('../utils')
-
 
 const calVolofPetrol = (number) => {
     const intNumber = parseInt(number)

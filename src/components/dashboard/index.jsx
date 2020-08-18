@@ -22,7 +22,7 @@ const Dashboard = () => {
         console.log(e)
       })
   const { data = [], mutate, error } = useSWR(
-    "/api/dashboard?limit=5&sortBy=date:desc",
+    "/api/daily?limit=5&sortBy=date:desc",
     fetcher
   )
   if (error) {
