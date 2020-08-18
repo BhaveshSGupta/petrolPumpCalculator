@@ -2187,6 +2187,5 @@ const convertedData = {
 module.exports = {
     connect,
     disconnect,
-    convertedData,
-    result
+    convertedData
 }
