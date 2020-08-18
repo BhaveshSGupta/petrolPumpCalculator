@@ -7,16 +7,17 @@ import {
 } from "react-router-dom"
 import PrivateRoute from "./components/privateRoute"
 import { isAuthenticated } from "./utils"
-const Layout = lazy(() => import("./components/layout"))
+import Layout from "./components/layout"
+import "./App.css"
 const Daily = lazy(() => import("./components/daily"))
 const Dashboard = lazy(() => import("./components/dashboard"))
 const Home = lazy(() => import("./components/home"))
 const dashboard = (
-  <Suspense fallback={<></>}>
-    <Layout>
+  <Layout>
+    <Suspense fallback={<div>Loading..</div>}>
       <Dashboard />
-    </Layout>
-  </Suspense>
+    </Suspense>
+  </Layout>
 )
 export default function App() {
   return (
@@ -26,20 +27,20 @@ export default function App() {
           {isAuthenticated() ? (
             <Redirect to="/dashboard" />
           ) : (
-            <Suspense fallback={<></>}>
-              <Layout>
+            <Layout>
+              <Suspense fallback={<div>Loading..</div>}>
                 <Home />
-              </Layout>
-            </Suspense>
+              </Suspense>
+            </Layout>
           )}
         </Route>
         <PrivateRoute path="/dashboard" component={dashboard}></PrivateRoute>
         <Route path="/daily">
-          <Suspense fallback={<></>}>
-            <Layout>
+          <Layout>
+            <Suspense fallback={<div>Loading..</div>}>
               <Daily />
-            </Layout>
-          </Suspense>
+            </Suspense>
+          </Layout>
         </Route>
       </Switch>
     </Router>

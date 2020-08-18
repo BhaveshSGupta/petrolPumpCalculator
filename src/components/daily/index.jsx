@@ -1,7 +1,6 @@
 import React from "react"
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import "./daily.css"
-import { NavLink } from "react-router-dom"
 import * as Yup from "yup"
 import { DatePickerField } from "./components/DatePicker"
 import "react-datepicker/dist/react-datepicker.css"
@@ -11,18 +10,8 @@ const Daily = () => {
   // be called when the form is submitted
   // const [startDate, setStartDate] = useState(new Date())
   return (
-    <div>
-    <h1>Daily</h1>
-    <div>
-        <ul>
-          <li>
-            <NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink>
-          </li>
-          <li>
-            <NavLink to="/daily" activeClassName="active">Daily</NavLink>
-          </li>
-        </ul>
-      </div>
+    <div className={"Dailyform"}>
+      <h1>Daily Data Entry</h1>
       <Formik
         initialValues={{
           MS: "",
@@ -127,7 +116,6 @@ const Daily = () => {
             .positive("Cannot be Negative"),
         })}
         onSubmit={async values => {
-          // console.log({ sumbitvalues: values })
           fetch("/api/daily", {
             method: "POST",
             body: JSON.stringify(values),
@@ -137,113 +125,164 @@ const Daily = () => {
           })
             .then(res => res.json())
             .then(res => {
-              // console.log({ response: res })
               alert(`Volume of MS:${res.Volume_in_MS} 
             Volume of HSD1:${res.Volume_in_HSD_DIP1}
             Volume of HSD2:${res.Volume_in_HSD_DIP1}`)
             })
-          // console.log(values);
-          // alert(JSON.stringify(values, null, 2));
         }}
       >
         <Form>
-          <label htmlFor="date">Date</label>
-          <DatePickerField name="date" />
-          <label htmlFor="MS">MS</label>
-          <Field name="MS" type="text" />
-          <ErrorMessage name="MS" />
-          <label htmlFor="HSD">HSD</label>
-          <Field name="HSD" type="text" />
-          <ErrorMessage name="HSD" />
-          <label htmlFor="MS_DIP">MS_DIP</label>
-          <Field name="MS_DIP" type="text" />
-          <ErrorMessage name="MS_DIP" />
-          <label htmlFor="HSD_DIP1">HSD_DIP1</label>
-          <Field name="HSD_DIP1" type="text" />
-          <ErrorMessage name="HSD_DIP1" />
-          <label htmlFor="HSD_DIP2">HSD_DIP2</label>
-          <Field name="HSD_DIP2" type="text" />
-          <ErrorMessage name="HSD_DIP2" />
-          <label htmlFor="Closing_Reading_MS_Dispenser_1_Nozle_1">
-            Closing_Reading_MS_Dispenser_1_Nozle_1
-          </label>
-          <Field name="Closing_Reading_MS_Dispenser_1_Nozle_1" type="text" />
-          <ErrorMessage name="Closing_Reading_MS_Dispenser_1_Nozle_1" />
-          <label htmlFor="Closing_Reading_MS_Dispenser_1_Nozle_2">
-            Closing_Reading_MS_Dispenser_1_Nozle_2
-          </label>
-          <Field name="Closing_Reading_MS_Dispenser_1_Nozle_2" type="text" />
-          <ErrorMessage name="Closing_Reading_MS_Dispenser_1_Nozle_2" />
-          <label htmlFor="Testing_MS_Dispenser_1_Nozle_1">
-            Testing_MS_Dispenser_1_Nozle_1
-          </label>
-          <Field name="Testing_MS_Dispenser_1_Nozle_1" type="text" />
-          <ErrorMessage name="Testing_MS_Dispenser_1_Nozle_1" />
-          <label htmlFor="Testing_MS_Dispenser_1_Nozle_2">
-            Testing_MS_Dispenser_1_Nozle_2
-          </label>
-          <Field name="Testing_MS_Dispenser_1_Nozle_2" type="text" />
-          <ErrorMessage name="Testing_MS_Dispenser_1_Nozle_2" />
-          <label htmlFor="Closing_Reading_HSD_Dispenser_1_Nozle_1">
-            Closing_Reading_HSD_Dispenser_1_Nozle_1
-          </label>
-          <Field name="Closing_Reading_HSD_Dispenser_1_Nozle_1" type="text" />
-          <ErrorMessage name="Closing_Reading_HSD_Dispenser_1_Nozle_1" />
-          <label htmlFor="Closing_Reading_HSD_Dispenser_1_Nozle_2">
-            Closing_Reading_HSD_Dispenser_1_Nozle_2
-          </label>
-          <Field name="Closing_Reading_HSD_Dispenser_1_Nozle_2" type="text" />
-          <ErrorMessage name="Closing_Reading_HSD_Dispenser_1_Nozle_2" />
-          <label htmlFor="Closing_Reading_HSD_Dispenser_2_Nozle_1">
-            Closing_Reading_HSD_Dispenser_2_Nozle_1
-          </label>
-          <Field name="Closing_Reading_HSD_Dispenser_2_Nozle_1" type="text" />
-          <ErrorMessage name="Closing_Reading_HSD_Dispenser_2_Nozle_1" />
-          <label htmlFor="Closing_Reading_HSD_Dispenser_2_Nozle_2">
-            Closing_Reading_HSD_Dispenser_2_Nozle_2
-          </label>
-          <Field name="Closing_Reading_HSD_Dispenser_2_Nozle_2" type="text" />
-          <ErrorMessage name="Closing_Reading_HSD_Dispenser_2_Nozle_2" />
-          <label htmlFor="Closing_Reading_HSD_Dispenser_3_Nozle_1">
-            Closing_Reading_HSD_Dispenser_3_Nozle_1
-          </label>
-          <Field name="Closing_Reading_HSD_Dispenser_3_Nozle_1" type="text" />
-          <ErrorMessage name="Closing_Reading_HSD_Dispenser_3_Nozle_1" />
-          <label htmlFor="Closing_Reading_HSD_Dispenser_3_Nozle_2">
-            Closing_Reading_HSD_Dispenser_3_Nozle_2
-          </label>
-          <Field name="Closing_Reading_HSD_Dispenser_3_Nozle_2" type="text" />
-          <ErrorMessage name="Closing_Reading_HSD_Dispenser_3_Nozle_2" />
-          <label htmlFor="Testing_HSD_Dispenser_1_Nozle_1">
-            Testing_HSD_Dispenser_1_Nozle_1
-          </label>
-          <Field name="Testing_HSD_Dispenser_1_Nozle_1" type="text" />
-          <ErrorMessage name="Testing_HSD_Dispenser_1_Nozle_1" />
-          <label htmlFor="Testing_HSD_Dispenser_1_Nozle_2">
-            Testing_HSD_Dispenser_1_Nozle_2
-          </label>
-          <Field name="Testing_HSD_Dispenser_1_Nozle_2" type="text" />
-          <ErrorMessage name="Testing_HSD_Dispenser_1_Nozle_2" />
-          <label htmlFor="Testing_HSD_Dispenser_2_Nozle_1">
-            Testing_HSD_Dispenser_2_Nozle_1
-          </label>
-          <Field name="Testing_HSD_Dispenser_2_Nozle_1" type="text" />
-          <ErrorMessage name="Testing_HSD_Dispenser_2_Nozle_1" />
-          <label htmlFor="Testing_HSD_Dispenser_2_Nozle_2">
-            Testing_HSD_Dispenser_2_Nozle_2
-          </label>
-          <Field name="Testing_HSD_Dispenser_2_Nozle_2" type="text" />
-          <ErrorMessage name="Testing_HSD_Dispenser_2_Nozle_2" />
-          <label htmlFor="Testing_HSD_Dispenser_3_Nozle_1">
-            Testing_HSD_Dispenser_3_Nozle_1
-          </label>
-          <Field name="Testing_HSD_Dispenser_3_Nozle_1" type="text" />
-          <ErrorMessage name="Testing_HSD_Dispenser_3_Nozle_1" />
-          <label htmlFor="Testing_HSD_Dispenser_3_Nozle_2">
-            Testing_HSD_Dispenser_3_Nozle_2
-          </label>
-          <Field name="Testing_HSD_Dispenser_3_Nozle_2" type="text" />
-          <ErrorMessage name="Testing_HSD_Dispenser_3_Nozle_2" />
+          <div className={"row"}>
+            <label htmlFor="date">Date</label>
+            <DatePickerField name="date" />
+          </div>
+          <div className={"row"}>
+            <div>
+              <label htmlFor="MS">MS</label>
+              <Field name="MS" type="text" />
+              <ErrorMessage name="MS" />
+            </div>
+            <div>
+              <label htmlFor="HSD">HSD</label>
+              <Field name="HSD" type="text" />
+              <ErrorMessage name="HSD" />
+            </div>
+          </div>
+          <div className={"row"}>
+            <div>
+              <label htmlFor="MS_DIP">MS_DIP</label>
+              <Field name="MS_DIP" type="text" />
+              <ErrorMessage name="MS_DIP" />
+            </div>
+            <div>
+              <label htmlFor="HSD_DIP1">HSD_DIP1</label>
+              <Field name="HSD_DIP1" type="text" />
+              <ErrorMessage name="HSD_DIP1" />
+            </div>
+            <div>
+              <label htmlFor="HSD_DIP2">HSD_DIP2</label>
+              <Field name="HSD_DIP2" type="text" />
+              <ErrorMessage name="HSD_DIP2" />
+            </div>
+          </div>
+          <div className={"row"}>
+            <div className={"rowChild"}>
+              <div>
+                <label htmlFor="Closing_Reading_MS_Dispenser_1_Nozle_1">
+                  Closing_Reading_MS_Dispenser_1_Nozle_1
+                </label>
+                <Field
+                  name="Closing_Reading_MS_Dispenser_1_Nozle_1"
+                  type="text"
+                />
+                <ErrorMessage name="Closing_Reading_MS_Dispenser_1_Nozle_1" />
+                <label htmlFor="Closing_Reading_MS_Dispenser_1_Nozle_2">
+                  Closing_Reading_MS_Dispenser_1_Nozle_2
+                </label>
+                <Field
+                  name="Closing_Reading_MS_Dispenser_1_Nozle_2"
+                  type="text"
+                />
+                <ErrorMessage name="Closing_Reading_MS_Dispenser_1_Nozle_2" />
+              </div>
+              <div>
+                <label htmlFor="Testing_MS_Dispenser_1_Nozle_1">
+                  Testing_MS_Dispenser_1_Nozle_1
+                </label>
+                <Field name="Testing_MS_Dispenser_1_Nozle_1" type="text" />
+                <ErrorMessage name="Testing_MS_Dispenser_1_Nozle_1" />
+                <label htmlFor="Testing_MS_Dispenser_1_Nozle_2">
+                  Testing_MS_Dispenser_1_Nozle_2
+                </label>
+                <Field name="Testing_MS_Dispenser_1_Nozle_2" type="text" />
+                <ErrorMessage name="Testing_MS_Dispenser_1_Nozle_2" />
+              </div>
+            </div>
+            <div  className={"rowChild"}>
+              <div>
+                <label htmlFor="Closing_Reading_HSD_Dispenser_1_Nozle_1">
+                  Closing_Reading_HSD_Dispenser_1_Nozle_1
+                </label>
+                <Field
+                  name="Closing_Reading_HSD_Dispenser_1_Nozle_1"
+                  type="text"
+                />
+                <ErrorMessage name="Closing_Reading_HSD_Dispenser_1_Nozle_1" />
+                <label htmlFor="Closing_Reading_HSD_Dispenser_1_Nozle_2">
+                  Closing_Reading_HSD_Dispenser_1_Nozle_2
+                </label>
+                <Field
+                  name="Closing_Reading_HSD_Dispenser_1_Nozle_2"
+                  type="text"
+                />
+                <ErrorMessage name="Closing_Reading_HSD_Dispenser_1_Nozle_2" />
+                <label htmlFor="Closing_Reading_HSD_Dispenser_2_Nozle_1">
+                  Closing_Reading_HSD_Dispenser_2_Nozle_1
+                </label>
+                <Field
+                  name="Closing_Reading_HSD_Dispenser_2_Nozle_1"
+                  type="text"
+                />
+                <ErrorMessage name="Closing_Reading_HSD_Dispenser_2_Nozle_1" />
+                <label htmlFor="Closing_Reading_HSD_Dispenser_2_Nozle_2">
+                  Closing_Reading_HSD_Dispenser_2_Nozle_2
+                </label>
+                <Field
+                  name="Closing_Reading_HSD_Dispenser_2_Nozle_2"
+                  type="text"
+                />
+                <ErrorMessage name="Closing_Reading_HSD_Dispenser_2_Nozle_2" />
+                <label htmlFor="Closing_Reading_HSD_Dispenser_3_Nozle_1">
+                  Closing_Reading_HSD_Dispenser_3_Nozle_1
+                </label>
+                <Field
+                  name="Closing_Reading_HSD_Dispenser_3_Nozle_1"
+                  type="text"
+                />
+                <ErrorMessage name="Closing_Reading_HSD_Dispenser_3_Nozle_1" />
+                <label htmlFor="Closing_Reading_HSD_Dispenser_3_Nozle_2">
+                  Closing_Reading_HSD_Dispenser_3_Nozle_2
+                </label>
+                <Field
+                  name="Closing_Reading_HSD_Dispenser_3_Nozle_2"
+                  type="text"
+                />
+                <ErrorMessage name="Closing_Reading_HSD_Dispenser_3_Nozle_2" />
+              </div>
+              <div>
+                <label htmlFor="Testing_HSD_Dispenser_1_Nozle_1">
+                  Testing_HSD_Dispenser_1_Nozle_1
+                </label>
+                <Field name="Testing_HSD_Dispenser_1_Nozle_1" type="text" />
+                <ErrorMessage name="Testing_HSD_Dispenser_1_Nozle_1" />
+                <label htmlFor="Testing_HSD_Dispenser_1_Nozle_2">
+                  Testing_HSD_Dispenser_1_Nozle_2
+                </label>
+                <Field name="Testing_HSD_Dispenser_1_Nozle_2" type="text" />
+                <ErrorMessage name="Testing_HSD_Dispenser_1_Nozle_2" />
+                <label htmlFor="Testing_HSD_Dispenser_2_Nozle_1">
+                  Testing_HSD_Dispenser_2_Nozle_1
+                </label>
+                <Field name="Testing_HSD_Dispenser_2_Nozle_1" type="text" />
+                <ErrorMessage name="Testing_HSD_Dispenser_2_Nozle_1" />
+                <label htmlFor="Testing_HSD_Dispenser_2_Nozle_2">
+                  Testing_HSD_Dispenser_2_Nozle_2
+                </label>
+                <Field name="Testing_HSD_Dispenser_2_Nozle_2" type="text" />
+                <ErrorMessage name="Testing_HSD_Dispenser_2_Nozle_2" />
+                <label htmlFor="Testing_HSD_Dispenser_3_Nozle_1">
+                  Testing_HSD_Dispenser_3_Nozle_1
+                </label>
+                <Field name="Testing_HSD_Dispenser_3_Nozle_1" type="text" />
+                <ErrorMessage name="Testing_HSD_Dispenser_3_Nozle_1" />
+                <label htmlFor="Testing_HSD_Dispenser_3_Nozle_2">
+                  Testing_HSD_Dispenser_3_Nozle_2
+                </label>
+                <Field name="Testing_HSD_Dispenser_3_Nozle_2" type="text" />
+                <ErrorMessage name="Testing_HSD_Dispenser_3_Nozle_2" />
+              </div>
+            </div>
+          </div>
           <button type="submit">Submit</button>
         </Form>
       </Formik>

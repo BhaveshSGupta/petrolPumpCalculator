@@ -1,0 +1,16 @@
+.Dailyform label {
+  width: 100%;
+  display: block;
+}
+.width50 {
+  width: 50%;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.rowChild {
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  display: flex;
+}

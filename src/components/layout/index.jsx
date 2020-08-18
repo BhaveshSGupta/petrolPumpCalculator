@@ -126,7 +126,7 @@ const Layout = props => {
                   </Layer>
                 ))}
 
-              <Box flex align="start" justify="start">
+              <Box flex align="start" justify="start" pad={"20px"}>
                 {props.children}
               </Box>
             </Box>
