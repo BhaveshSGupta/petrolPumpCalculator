@@ -22,7 +22,7 @@ const Dashboard = () => {
         console.log(e)
       })
   const { data = [], mutate, error } = useSWR(
-    "/api/daily?limit=5&sortBy=date:desc",
+    "/api/dashboard?sortBy=date:desc",
     fetcher
   )
   if (error) {
@@ -35,7 +35,14 @@ const Dashboard = () => {
       {data.length > 0 &&
         data.map((day, index) => {
           let d = new Date(day.date)
-          return <div key={index}>{d.toLocaleString("en-IN")}</div>
+          return (
+            <div key={index} style={{ display: "flex" }}>
+              <div style={{ margin: "20px 10px" }}>{d.toLocaleString("en-IN")}</div>
+              <div style={{ margin: "20px 10px" }}>{day.Volume_in_MS}</div>
+              <div style={{ margin: "20px 10px" }}>{day.Volume_in_HSD_DIP1}</div>
+              <div style={{ margin: "20px 10px" }}>{day.Volume_in_HSD_DIP2}</div>
+            </div>
+          )
         })}
     </div>
   )

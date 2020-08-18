@@ -12,11 +12,11 @@ app.get('/api/dashboard', auth, async (req, res) => {
     try {
         const data = await dailyData.find(
             {}, null, {
-            limit: 1,
+            limit: parseInt(req.query.limit),
             skip: parseInt(req.query.skip),
             sort
         }
-        ).select('date')
+        )
         disconnect('dashboard')
         res.status(200).send(data)
 
