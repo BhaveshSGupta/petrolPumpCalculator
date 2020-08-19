@@ -289,4 +289,5 @@ const Daily = () => {
     </div>
   )
 }
+Daily.whyDidYouRender = true
 export default Daily

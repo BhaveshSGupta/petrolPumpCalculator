@@ -32,7 +32,7 @@ const theme = {
 const handleLogout = async history => {
   try {
     const requestOptions = {
-      method: "POST"
+      method: "POST",
     }
     fetch("/api/users/logout", requestOptions).then(async response => {
       if (response.status === 200) {
@@ -42,8 +42,8 @@ const handleLogout = async history => {
             isLoggedIn: false,
           })
         )
-        history.push("/")
         const data = await response.json()
+        history.push("/")
         return { body: data, status: response.status }
       }
     })
@@ -130,7 +130,7 @@ const Layout = props => {
                 {props.children}
               </Box>
             </Box>
-            <Footer background="brand" pad="medium" >
+            <Footer background="brand" pad="medium">
               <Text size="small">Copyright</Text>
             </Footer>
           </Box>
@@ -139,5 +139,5 @@ const Layout = props => {
     </Grommet>
   )
 }
-
+Layout.whyDidYouRender = true
 export default Layout

@@ -120,7 +120,7 @@ const DailyDataSechema = new mongoose.Schema({
   next: {
     type: String
   },
-  date: {
+  Date: {
     type: Date
   }
 }, {

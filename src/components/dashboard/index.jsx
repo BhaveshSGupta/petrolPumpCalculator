@@ -32,20 +32,39 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard</h1>
-      {data.length > 0 &&
-        data.map((day, index) => {
-          let d = new Date(day.date)
-          return (
-            <div key={index} style={{ display: "flex" }}>
-              <div style={{ margin: "20px 10px" }}>{d.toLocaleString("en-IN")}</div>
-              <div style={{ margin: "20px 10px" }}>{day.Volume_in_MS}</div>
-              <div style={{ margin: "20px 10px" }}>{day.Volume_in_HSD_DIP1}</div>
-              <div style={{ margin: "20px 10px" }}>{day.Volume_in_HSD_DIP2}</div>
-            </div>
-          )
-        })}
+      {data.length > 0 && (
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Volume for MS</th>
+              <th>Volume for HSD1</th>
+              <th>Volume for HSD2</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((day, index) => {
+              let d = new Date(day.Date)
+              return (
+                <tr key={index}>
+                  <td style={{ margin: "20px 10px" }}>
+                    {d.toLocaleString("en-IN", { dateStyle: "medium" })}
+                  </td>
+                  <td style={{ margin: "20px 10px" }}>{day.Volume_in_MS}</td>
+                  <td style={{ margin: "20px 10px" }}>
+                    {day.Volume_in_HSD_DIP1}
+                  </td>
+                  <td style={{ margin: "20px 10px" }}>
+                    {day.Volume_in_HSD_DIP2}
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
   )
 }
-
+Dashboard.whyDidYouRender = true
 export default Dashboard

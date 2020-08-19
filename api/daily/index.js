@@ -2,9 +2,11 @@ const { convertedData: volumneStaticData, connect, disconnect } = require("../ut
 const dailyData = require("../models/daily")
 const app = require('../app')
 const auth = require('../authentication')
+const result = require('../data/push')
 
 const calVolofPetrol = (number) => {
     const intNumber = parseInt(number)
+    // console.log(intNumber)
     if (intNumber < number) {
         return (number - intNumber) * 10 * volumneStaticData.MS[intNumber - 1].DIFFERENCE + volumneStaticData.MS[intNumber - 1].VOLUME
     }
@@ -86,4 +88,49 @@ app.post('/api/daily', auth, async (request, response) => {
     }
     disconnect('dailyCatch')
 })
+
+
+app.put('/api/daily', async (request, response) => {
+    connect('Daily')
+    await Promise.all(result.Sheet1.map(async element => {
+        const inputData = {
+            ...element
+        }
+        let allPreviousData = {}
+        try {
+            allPreviousData = await dailyData.findOne()
+            if (!allPreviousData) {
+                allPreviousData = {}
+                allPreviousData._id = ''
+            }
+        } catch {
+            allPreviousData._id = ''
+        }
+        const dailydata = new dailyData({
+            ...element,
+            "Volume_in_MS": (calVolofPetrol(inputData.MS_DIP)).toFixed(0),
+            "Volume_in_HSD_DIP1": (calVolofDiesel(inputData.HSD_DIP1)).toFixed(0),
+            "Volume_in_HSD_DIP2": (calVolofDiesel(inputData.HSD_DIP2)).toFixed(0),
+            "ABS_Volume_in_MS": calVolofPetrol(inputData.MS_DIP),
+            "ABS_Volume_in_HSD_DIP1": calVolofDiesel(inputData.HSD_DIP1),
+            "ABS_Volume_in_HSD_DIP2": calVolofDiesel(inputData.HSD_DIP2),
+            "previous": allPreviousData._id,
+            "next": ''
+        })
+
+        const idCurrent = await dailydata.save()
+
+        if (allPreviousData._id !== '') {
+            const test = await dailyData.findByIdAndUpdate(allPreviousData.id, {
+                "next": idCurrent.id
+            })
+        }
+        return ''
+
+    }))
+    response.send('dataAdded')
+
+
+})
+
 module.exports = app
