@@ -2,7 +2,18 @@ const { convertedData: volumneStaticData, connect, disconnect } = require("../ut
 const dailyData = require("../models/daily")
 const app = require('../app')
 const auth = require('../authentication')
-const result = require('../data/push')
+const parser = require("convert-excel-to-json");
+const path = require("path");
+
+const result = parser({
+    sourceFile: path.join(__dirname, "../data/data.xlsx"),
+    header: {
+        rows: 1
+    },
+    columnToKey: {
+        "*": "{{columnHeader}}"
+    }
+});
 
 const calVolofPetrol = (number) => {
     const intNumber = parseInt(number)
