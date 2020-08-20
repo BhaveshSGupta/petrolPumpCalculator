@@ -150,17 +150,17 @@ const Daily = () => {
           </div>
           <div className={"row"}>
             <div>
-              <label htmlFor="MS_DIP">MS_DIP</label>
+              <label htmlFor="MS_DIP">MS DIP</label>
               <Field name="MS_DIP" type="text" />
               <ErrorMessage name="MS_DIP" />
             </div>
             <div>
-              <label htmlFor="HSD_DIP1">HSD_DIP1</label>
+              <label htmlFor="HSD_DIP1">HSD DIP1</label>
               <Field name="HSD_DIP1" type="text" />
               <ErrorMessage name="HSD_DIP1" />
             </div>
             <div>
-              <label htmlFor="HSD_DIP2">HSD_DIP2</label>
+              <label htmlFor="HSD_DIP2">HSD DIP2</label>
               <Field name="HSD_DIP2" type="text" />
               <ErrorMessage name="HSD_DIP2" />
             </div>
@@ -169,7 +169,7 @@ const Daily = () => {
             <div className={"rowChild"}>
               <div>
                 <label htmlFor="Closing_Reading_MS_Dispenser_1_Nozle_1">
-                  Closing_Reading_MS_Dispenser_1_Nozle_1
+                  Closing Reading MS Dispenser 1 Nozle 1
                 </label>
                 <Field
                   name="Closing_Reading_MS_Dispenser_1_Nozle_1"
@@ -177,7 +177,7 @@ const Daily = () => {
                 />
                 <ErrorMessage name="Closing_Reading_MS_Dispenser_1_Nozle_1" />
                 <label htmlFor="Closing_Reading_MS_Dispenser_1_Nozle_2">
-                  Closing_Reading_MS_Dispenser_1_Nozle_2
+                  Closing Reading MS Dispenser 1 Nozle 2
                 </label>
                 <Field
                   name="Closing_Reading_MS_Dispenser_1_Nozle_2"
@@ -187,12 +187,12 @@ const Daily = () => {
               </div>
               <div>
                 <label htmlFor="Testing_MS_Dispenser_1_Nozle_1">
-                  Testing_MS_Dispenser_1_Nozle_1
+                  Testing MS Dispenser 1 Nozle 1
                 </label>
                 <Field name="Testing_MS_Dispenser_1_Nozle_1" type="text" />
                 <ErrorMessage name="Testing_MS_Dispenser_1_Nozle_1" />
                 <label htmlFor="Testing_MS_Dispenser_1_Nozle_2">
-                  Testing_MS_Dispenser_1_Nozle_2
+                  Testing MS Dispenser 1 Nozle 2
                 </label>
                 <Field name="Testing_MS_Dispenser_1_Nozle_2" type="text" />
                 <ErrorMessage name="Testing_MS_Dispenser_1_Nozle_2" />
@@ -201,7 +201,7 @@ const Daily = () => {
             <div  className={"rowChild"}>
               <div>
                 <label htmlFor="Closing_Reading_HSD_Dispenser_1_Nozle_1">
-                  Closing_Reading_HSD_Dispenser_1_Nozle_1
+                  Closing Reading HSD Dispenser 1 Nozle 1
                 </label>
                 <Field
                   name="Closing_Reading_HSD_Dispenser_1_Nozle_1"
@@ -209,7 +209,7 @@ const Daily = () => {
                 />
                 <ErrorMessage name="Closing_Reading_HSD_Dispenser_1_Nozle_1" />
                 <label htmlFor="Closing_Reading_HSD_Dispenser_1_Nozle_2">
-                  Closing_Reading_HSD_Dispenser_1_Nozle_2
+                  Closing Reading HSD Dispenser 1 Nozle 2
                 </label>
                 <Field
                   name="Closing_Reading_HSD_Dispenser_1_Nozle_2"
@@ -217,7 +217,7 @@ const Daily = () => {
                 />
                 <ErrorMessage name="Closing_Reading_HSD_Dispenser_1_Nozle_2" />
                 <label htmlFor="Closing_Reading_HSD_Dispenser_2_Nozle_1">
-                  Closing_Reading_HSD_Dispenser_2_Nozle_1
+                  Closing Reading HSD Dispenser 2 Nozle 1
                 </label>
                 <Field
                   name="Closing_Reading_HSD_Dispenser_2_Nozle_1"
@@ -225,7 +225,7 @@ const Daily = () => {
                 />
                 <ErrorMessage name="Closing_Reading_HSD_Dispenser_2_Nozle_1" />
                 <label htmlFor="Closing_Reading_HSD_Dispenser_2_Nozle_2">
-                  Closing_Reading_HSD_Dispenser_2_Nozle_2
+                  Closing Reading HSD Dispenser 2 Nozle 2
                 </label>
                 <Field
                   name="Closing_Reading_HSD_Dispenser_2_Nozle_2"
@@ -233,7 +233,7 @@ const Daily = () => {
                 />
                 <ErrorMessage name="Closing_Reading_HSD_Dispenser_2_Nozle_2" />
                 <label htmlFor="Closing_Reading_HSD_Dispenser_3_Nozle_1">
-                  Closing_Reading_HSD_Dispenser_3_Nozle_1
+                  Closing Reading HSD Dispenser 3 Nozle 1
                 </label>
                 <Field
                   name="Closing_Reading_HSD_Dispenser_3_Nozle_1"
@@ -241,7 +241,7 @@ const Daily = () => {
                 />
                 <ErrorMessage name="Closing_Reading_HSD_Dispenser_3_Nozle_1" />
                 <label htmlFor="Closing_Reading_HSD_Dispenser_3_Nozle_2">
-                  Closing_Reading_HSD_Dispenser_3_Nozle_2
+                  Closing Reading HSD Dispenser 3 Nozle 2
                 </label>
                 <Field
                   name="Closing_Reading_HSD_Dispenser_3_Nozle_2"
@@ -251,32 +251,32 @@ const Daily = () => {
               </div>
               <div>
                 <label htmlFor="Testing_HSD_Dispenser_1_Nozle_1">
-                  Testing_HSD_Dispenser_1_Nozle_1
+                  Testing HSD Dispenser 1 Nozle 1
                 </label>
                 <Field name="Testing_HSD_Dispenser_1_Nozle_1" type="text" />
                 <ErrorMessage name="Testing_HSD_Dispenser_1_Nozle_1" />
                 <label htmlFor="Testing_HSD_Dispenser_1_Nozle_2">
-                  Testing_HSD_Dispenser_1_Nozle_2
+                  Testing HSD Dispenser 1 Nozle 2
                 </label>
                 <Field name="Testing_HSD_Dispenser_1_Nozle_2" type="text" />
                 <ErrorMessage name="Testing_HSD_Dispenser_1_Nozle_2" />
                 <label htmlFor="Testing_HSD_Dispenser_2_Nozle_1">
-                  Testing_HSD_Dispenser_2_Nozle_1
+                  Testing HSD Dispenser 2 Nozle 1
                 </label>
                 <Field name="Testing_HSD_Dispenser_2_Nozle_1" type="text" />
                 <ErrorMessage name="Testing_HSD_Dispenser_2_Nozle_1" />
                 <label htmlFor="Testing_HSD_Dispenser_2_Nozle_2">
-                  Testing_HSD_Dispenser_2_Nozle_2
+                  Testing HSD Dispenser 2 Nozle 2
                 </label>
                 <Field name="Testing_HSD_Dispenser_2_Nozle_2" type="text" />
                 <ErrorMessage name="Testing_HSD_Dispenser_2_Nozle_2" />
                 <label htmlFor="Testing_HSD_Dispenser_3_Nozle_1">
-                  Testing_HSD_Dispenser_3_Nozle_1
+                  Testing HSD Dispenser 3 Nozle 1
                 </label>
                 <Field name="Testing_HSD_Dispenser_3_Nozle_1" type="text" />
                 <ErrorMessage name="Testing_HSD_Dispenser_3_Nozle_1" />
                 <label htmlFor="Testing_HSD_Dispenser_3_Nozle_2">
-                  Testing_HSD_Dispenser_3_Nozle_2
+                  Testing HSD Dispenser 3 Nozle 2
                 </label>
                 <Field name="Testing_HSD_Dispenser_3_Nozle_2" type="text" />
                 <ErrorMessage name="Testing_HSD_Dispenser_3_Nozle_2" />
