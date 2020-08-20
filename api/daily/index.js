@@ -101,7 +101,7 @@ app.post('/api/daily', auth, async (request, response) => {
 })
 
 
-app.put('/api/daily', async (request, response) => {
+app.put('/api/daily', auth, async (request, response) => {
     connect('Daily')
     await Promise.all(result.Sheet1.map(async element => {
         const inputData = {
@@ -136,6 +136,7 @@ app.put('/api/daily', async (request, response) => {
                 "next": idCurrent.id
             })
         }
+        console.log('added')
         return ''
 
     }))

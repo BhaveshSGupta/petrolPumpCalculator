@@ -1,6 +1,10 @@
+.Dailyform {
+  padding-bottom: 50px;
+}
 .Dailyform label {
   width: 100%;
   display: block;
+  margin-bottom: 5px;
 }
 .width50 {
   width: 50%;
@@ -8,9 +12,30 @@
 .row {
   display: flex;
   flex-wrap: wrap;
+  margin: 20px 0;
 }
 .rowChild {
   flex-basis: 100%;
   flex-wrap: wrap;
   display: flex;
+  /* margin: 15px 0; */
+}
+.rowChild > div {
+  margin-right: 20px;
+}
+.row > div {
+  margin-right: 20px;
+}
+
+.rowChild > div > div {
+  margin-bottom: 20px;
+}
+@media only screen and (max-width:768px) {
+  div {
+
+    width: 100%;
+    margin-right: 0 !important;
+    margin: 0 20px 20px 0 !important;
+
+}
 }

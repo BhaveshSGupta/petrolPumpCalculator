@@ -30,20 +30,20 @@ const theme = {
   },
 }
 const handleLogout = async history => {
+  window.localStorage.setItem(
+    "loggedIn",
+    JSON.stringify({
+      isLoggedIn: false,
+    })
+  )
+  history.push("/")
   try {
     const requestOptions = {
       method: "POST",
     }
     fetch("/api/users/logout", requestOptions).then(async response => {
       if (response.status === 200) {
-        window.localStorage.setItem(
-          "loggedIn",
-          JSON.stringify({
-            isLoggedIn: false,
-          })
-        )
         const data = await response.json()
-        history.push("/")
         return { body: data, status: response.status }
       }
     })
