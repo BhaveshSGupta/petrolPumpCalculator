@@ -133,8 +133,8 @@ const Daily = () => {
       >
         <Form>
           <div className={"row"}>
-            <label htmlFor="date">Date</label>
-            <DatePickerField name="date" />
+            <label htmlFor="Date">Date</label>
+            <DatePickerField name="Date" />
           </div>
           <div className={"row"}>
             <div>
