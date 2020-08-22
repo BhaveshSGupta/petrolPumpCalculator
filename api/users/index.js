@@ -4,7 +4,7 @@ const { connect, disconnect } = require('../utils')
 
 app.post('/api/users', async (req, res) => {
     connect()
-    process.env.NODE_ENV === "development" && console.log("signup")
+     console.log("signup")
     const user = new User(req.body)
     try {
         await user.save()

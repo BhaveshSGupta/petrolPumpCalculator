@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const path = require("path");
 
 const connect = (from) => {
-    !!from && process.env.NODE_ENV === "development" && console.log(`connected from ${from}`)
+    !!from && console.log(`Connected from ${from}`)
     mongoose.connect(process.env.MONGODB_URL, {
         useFindAndModify: false,
         useNewUrlParser: true,
@@ -12,7 +12,7 @@ const connect = (from) => {
 }
 
 const disconnect = (from) => {
-    !!from && process.env.NODE_ENV === "development" && console.log(`disconnected from ${from}`)
+    !!from && console.log(`Disconnected from ${from}`)
     mongoose.disconnect()
 }
 

@@ -3,7 +3,7 @@ const { disconnect } = require('../utils')
 const auth = require('../authentication')
 
 app.post('/api/users/logout', auth, async (req, res) => {
-    process.env.NODE_ENV === "development" && console.log('logout')
+     console.log('logout')
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
