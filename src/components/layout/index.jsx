@@ -61,7 +61,7 @@ const Layout = props => {
           <Box fill>
             <Header background="brand" pad="small">
               <Heading level="3" margin="none">
-                Petrol Pump Calculations
+              Keshav
               </Heading>
               {isAuthenticated() && (
                 <Nav direction="row" align="center">
@@ -71,13 +71,13 @@ const Layout = props => {
                   <NavLink to="/dashboard" activeClassName="active">
                     Dashboard
                   </NavLink>
-                  <Anchor href="/profile">
+                  {/* <Anchor href="/profile">
                     <Avatar src={gravatarLink} />
                   </Anchor>
                   <Button
                     icon={<Notification />}
                     onClick={() => setShowSidebar(!showSidebar)}
-                  />
+                  /> */}
                   <Button
                     icon={<Logout />}
                     onClick={() => handleLogout(history)}
@@ -86,7 +86,7 @@ const Layout = props => {
               )}
             </Header>
             <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-              {isAuthenticated() &&
+              {/* {isAuthenticated() &&
                 showSidebar &&
                 (size !== "small" ? (
                   <Collapsible direction="horizontal" open={showSidebar}>
@@ -124,7 +124,7 @@ const Layout = props => {
                       sidebar
                     </Box>
                   </Layer>
-                ))}
+                ))} */}
 
               <Box flex align="start" justify="start" pad={"20px"}>
                 {props.children}
