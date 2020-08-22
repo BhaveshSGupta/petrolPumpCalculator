@@ -30,12 +30,18 @@
 .rowChild > div > div {
   margin-bottom: 20px;
 }
-@media only screen and (max-width:768px) {
-  div {
-
+@media only screen and (max-width: 768px) {
+  .Dailyform label{
+    margin-top:20px
+  }
+  .width50 {
     width: 100%;
     margin-right: 0 !important;
     margin: 0 20px 20px 0 !important;
-
-}
+  }
+  .row {
+    margin: 20px 0;
+    width: 100%;
+    display: block;
+  }
 }
