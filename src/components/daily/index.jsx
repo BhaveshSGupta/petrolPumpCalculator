@@ -35,7 +35,7 @@ const Daily = () => {
           Testing_HSD_Dispenser_2_Nozle_2: "15",
           Testing_HSD_Dispenser_3_Nozle_1: "15",
           Testing_HSD_Dispenser_3_Nozle_2: "15",
-          date: Date.now(),
+          Date: Date.now(),
         }}
         validationSchema={Yup.object({
           MS: Yup.number()
@@ -58,10 +58,10 @@ const Daily = () => {
             .typeError("Number is Required")
             .required("Required")
             .positive("Cannot be Negative"),
-          Closing_Reading_MS_Dispenser_1_Nozle_1: Yup.string().required(
+          Closing_Reading_MS_Dispenser_1_Nozle_1: Yup.number().required(
             "Required"
           ),
-          Closing_Reading_MS_Dispenser_1_Nozle_2: Yup.string().required(
+          Closing_Reading_MS_Dispenser_1_Nozle_2: Yup.number().required(
             "Required"
           ),
           Testing_MS_Dispenser_1_Nozle_1: Yup.number()
@@ -72,22 +72,22 @@ const Daily = () => {
             .typeError("Number is Required")
             .required("Required")
             .positive("Cannot be Negative"),
-          Closing_Reading_HSD_Dispenser_1_Nozle_1: Yup.string().required(
+          Closing_Reading_HSD_Dispenser_1_Nozle_1: Yup.number().required(
             "Required"
           ),
-          Closing_Reading_HSD_Dispenser_1_Nozle_2: Yup.string().required(
+          Closing_Reading_HSD_Dispenser_1_Nozle_2: Yup.number().required(
             "Required"
           ),
-          Closing_Reading_HSD_Dispenser_2_Nozle_1: Yup.string().required(
+          Closing_Reading_HSD_Dispenser_2_Nozle_1: Yup.number().required(
             "Required"
           ),
-          Closing_Reading_HSD_Dispenser_2_Nozle_2: Yup.string().required(
+          Closing_Reading_HSD_Dispenser_2_Nozle_2: Yup.number().required(
             "Required"
           ),
-          Closing_Reading_HSD_Dispenser_3_Nozle_1: Yup.string().required(
+          Closing_Reading_HSD_Dispenser_3_Nozle_1: Yup.number().required(
             "Required"
           ),
-          Closing_Reading_HSD_Dispenser_3_Nozle_2: Yup.string().required(
+          Closing_Reading_HSD_Dispenser_3_Nozle_2: Yup.number().required(
             "Required"
           ),
           Testing_HSD_Dispenser_1_Nozle_1: Yup.number()

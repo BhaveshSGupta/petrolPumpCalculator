@@ -40,6 +40,8 @@ const Dashboard = () => {
               <th>Volume for MS</th>
               <th>Volume for HSD1</th>
               <th>Volume for HSD2</th>
+              <th>Total for Petrol</th>
+              <th>Total for Diesel</th>
             </tr>
           </thead>
           <tbody>
@@ -57,6 +59,8 @@ const Dashboard = () => {
                   <td style={{ margin: "20px 10px" }}>
                     {day.Volume_in_HSD_DIP2}
                   </td>
+                  <td style={{ margin: "20px 10px" }}>{day.total_petrol}</td>
+                  <td style={{ margin: "20px 10px" }}>{day.total_deisel}</td>
                 </tr>
               )
             })}
