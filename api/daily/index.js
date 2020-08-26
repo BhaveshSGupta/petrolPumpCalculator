@@ -62,13 +62,13 @@ const calculationsfordb = (inputData, previousdata) => {
     if (!!previousdata) {
         // console.log({ previousdata })
         calculations = {
-            "total_petrol": (parseInt(inputData.Closing_Reading_MS_Dispenser_1_Nozle_1) - parseInt(previousdata.Closing_Reading_MS_Dispenser_1_Nozle_1)) + (parseInt(inputData.Closing_Reading_MS_Dispenser_1_Nozle_2) - parseInt(previousdata.Closing_Reading_MS_Dispenser_1_Nozle_2)) - (parseInt(inputData.Testing_MS_Dispenser_1_Nozle_1) + parseInt(inputData.Testing_MS_Dispenser_1_Nozle_2)),
+            "total_petrol": ((parseFloat(inputData.Closing_Reading_MS_Dispenser_1_Nozle_1) - parseFloat(previousdata.Closing_Reading_MS_Dispenser_1_Nozle_1)) + (parseFloat(inputData.Closing_Reading_MS_Dispenser_1_Nozle_2) - parseFloat(previousdata.Closing_Reading_MS_Dispenser_1_Nozle_2)) - (parseFloat(inputData.Testing_MS_Dispenser_1_Nozle_1) + parseFloat(inputData.Testing_MS_Dispenser_1_Nozle_2))).toFixed(4),
             "total_deisel":
-                (parseInt(inputData.Closing_Reading_HSD_Dispenser_1_Nozle_1) - parseInt(previousdata.Closing_Reading_HSD_Dispenser_1_Nozle_1)) +
-                (parseInt(inputData.Closing_Reading_HSD_Dispenser_1_Nozle_2) - parseInt(previousdata.Closing_Reading_HSD_Dispenser_1_Nozle_2)) +
-                (parseInt(inputData.Closing_Reading_HSD_Dispenser_2_Nozle_1) - parseInt(previousdata.Closing_Reading_HSD_Dispenser_2_Nozle_1)) +
-                (parseInt(inputData.Closing_Reading_HSD_Dispenser_2_Nozle_2) - parseInt(previousdata.Closing_Reading_HSD_Dispenser_2_Nozle_2)) + (parseInt(inputData.Closing_Reading_HSD_Dispenser_3_Nozle_1) - parseInt(previousdata.Closing_Reading_HSD_Dispenser_3_Nozle_1)) +
-                (parseInt(inputData.Closing_Reading_HSD_Dispenser_3_Nozle_2) - parseInt(previousdata.Closing_Reading_HSD_Dispenser_3_Nozle_2)) - (parseInt(inputData.Testing_HSD_Dispenser_1_Nozle_1) + parseInt(inputData.Testing_HSD_Dispenser_1_Nozle_2) + parseInt(inputData.Testing_HSD_Dispenser_2_Nozle_1) + parseInt(inputData.Testing_HSD_Dispenser_2_Nozle_2) + parseInt(inputData.Testing_HSD_Dispenser_3_Nozle_1) + parseInt(inputData.Testing_HSD_Dispenser_2_Nozle_2)),
+                ((parseFloat(inputData.Closing_Reading_HSD_Dispenser_1_Nozle_1) - parseFloat(previousdata.Closing_Reading_HSD_Dispenser_1_Nozle_1)) +
+                    (parseFloat(inputData.Closing_Reading_HSD_Dispenser_1_Nozle_2) - parseFloat(previousdata.Closing_Reading_HSD_Dispenser_1_Nozle_2)) +
+                    (parseFloat(inputData.Closing_Reading_HSD_Dispenser_2_Nozle_1) - parseFloat(previousdata.Closing_Reading_HSD_Dispenser_2_Nozle_1)) +
+                    (parseFloat(inputData.Closing_Reading_HSD_Dispenser_2_Nozle_2) - parseFloat(previousdata.Closing_Reading_HSD_Dispenser_2_Nozle_2)) + (parseFloat(inputData.Closing_Reading_HSD_Dispenser_3_Nozle_1) - parseFloat(previousdata.Closing_Reading_HSD_Dispenser_3_Nozle_1)) +
+                    (parseFloat(inputData.Closing_Reading_HSD_Dispenser_3_Nozle_2) - parseFloat(previousdata.Closing_Reading_HSD_Dispenser_3_Nozle_2)) - (parseFloat(inputData.Testing_HSD_Dispenser_1_Nozle_1) + parseFloat(inputData.Testing_HSD_Dispenser_1_Nozle_2) + parseFloat(inputData.Testing_HSD_Dispenser_2_Nozle_1) + parseFloat(inputData.Testing_HSD_Dispenser_2_Nozle_2) + parseFloat(inputData.Testing_HSD_Dispenser_3_Nozle_1) + parseFloat(inputData.Testing_HSD_Dispenser_2_Nozle_2))).toFixed(4),
             "previous": previousdata._id
         }
 

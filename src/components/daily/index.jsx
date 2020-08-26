@@ -67,11 +67,13 @@ const Daily = () => {
           Testing_MS_Dispenser_1_Nozle_1: Yup.number()
             .typeError("Number is Required")
             .required("Required")
-            .positive("Cannot be Negative"),
+            .integer("Cannot be in decimal")
+            .min(0, "Cannot be Negative"),
           Testing_MS_Dispenser_1_Nozle_2: Yup.number()
             .typeError("Number is Required")
             .required("Required")
-            .positive("Cannot be Negative"),
+            .integer("Cannot be in decimal")
+            .min(0, "Cannot be Negative"),
           Closing_Reading_HSD_Dispenser_1_Nozle_1: Yup.number().required(
             "Required"
           ),
@@ -93,27 +95,33 @@ const Daily = () => {
           Testing_HSD_Dispenser_1_Nozle_1: Yup.number()
             .typeError("Number is Required")
             .required("Required")
-            .positive("Cannot be Negative"),
+            .integer("Cannot be in decimal")
+            .min(0, "Cannot be Negative"),
           Testing_HSD_Dispenser_1_Nozle_2: Yup.number()
             .typeError("Number is Required")
             .required("Required")
-            .positive("Cannot be Negative"),
+            .integer("Cannot be in decimal")
+            .min(0, "Cannot be Negative"),
           Testing_HSD_Dispenser_2_Nozle_1: Yup.number()
             .typeError("Number is Required")
             .required("Required")
-            .positive("Cannot be Negative"),
+            .integer("Cannot be in decimal")
+            .min(0, "Cannot be Negative"),
           Testing_HSD_Dispenser_2_Nozle_2: Yup.number()
             .typeError("Number is Required")
             .required("Required")
-            .positive("Cannot be Negative"),
+            .integer("Cannot be in decimal")
+            .min(0, "Cannot be Negative"),
           Testing_HSD_Dispenser_3_Nozle_1: Yup.number()
             .typeError("Number is Required")
             .required("Required")
-            .positive("Cannot be Negative"),
+            .integer("Cannot be in decimal")
+            .min(0, "Cannot be Negative"),
           Testing_HSD_Dispenser_3_Nozle_2: Yup.number()
             .typeError("Number is Required")
             .required("Required")
-            .positive("Cannot be Negative"),
+            .integer("Cannot be in decimal")
+            .min(0, "Cannot be Negative")
         })}
         onSubmit={async values => {
           fetch("/api/daily", {

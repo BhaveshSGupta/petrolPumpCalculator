@@ -51,9 +51,6 @@ const handleLogout = async history => {
 }
 const Layout = props => {
   let history = useHistory()
-  const gravatarLink =
-    "//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80"
-  const [showSidebar, setShowSidebar] = useState(false)
   return (
     <Grommet theme={theme} full>
       <ResponsiveContext.Consumer>
