@@ -136,5 +136,4 @@ const Layout = props => {
     </Grommet>
   )
 }
-Layout.whyDidYouRender = true
 export default Layout

@@ -70,5 +70,4 @@ const Dashboard = () => {
     </div>
   )
 }
-Dashboard.whyDidYouRender = true
 export default Dashboard

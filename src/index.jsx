@@ -1,4 +1,4 @@
-import "./components/wdyr"
+// import "./components/wdyr"
 import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css'

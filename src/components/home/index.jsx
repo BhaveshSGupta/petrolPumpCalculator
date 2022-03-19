@@ -8,5 +8,4 @@ const Home = () => {
     </Box>
   )
 }
-Home.whyDidYouRender = true
 export default Home

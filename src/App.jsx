@@ -53,5 +53,4 @@ const App = () => {
     </Router>
   )
 }
-App.whyDidYouRender = true
 export default App
